@@ -1,121 +1,45 @@
-<!-- https://physics.weber.edu/schroeder/html5/webbasics.html -->
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Newton's Cannon</title>
-    <!-- <style>
-        h1 {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-        
-        p {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-    </style> -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
+  <!-- <style type="text/css">
+    canvas{
+      /* border: 1px solid black; */
+    }
+
+    body{
+      margin: 0px;
+    }
+  </style> -->
 </head>
 
-<body style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size:15px; width:600px; margin-left:auto; margin-right:auto; background-color:rgb(0, 29, 5); color: rgb(212, 253, 218);">
+<body style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size:15px; width:600px; margin-left:auto; margin-right:auto; background-color:rgb(3, 31, 36); color: rgb(231, 251, 255);">
 
-    <h1 style="font-size:24px;
-    text-align:center;">Newton's Cannon</h1>
+  <!-- <canvas></canvas> -->
 
-    <div style="width:500px; margin-left:auto; margin-right:auto;">
-        <!-- <img src="NewtonDrawing.jpg" width="500" height="500" style="position:absolute;"> -->
-        <canvas id="theCanvas" width="500" height="500" style="position:relative;">
-          Canvas not supported; please update your browser.
-        </canvas>
-    </div>
+  <h1 style="font-size:36px;
+  text-align:center;">Interkinetic nuclear migration with lateral inhibition</h1>
 
-    <div style="text-align: center;">
-        <input type="button" value="Fire!" onclick="fireProjectile();"> Initial speed = <span id="speedReadout">3000</span> m/s
-        <input type="range" id="speedSlider" min="0" max="8000" step="100" value="3000" oninput="showSpeed();" onchange="showSpeed();">
-    </div>
+  <div style="width:300px; margin-left:auto; margin-right:auto;">
+      <!-- <img src="NewtonDrawing.jpg" width="500" height="500" style="position:absolute;"> -->
+      <canvas id="theCanvas" width="300" height="600" style="position:relative;">
+        Canvas not supported; please update your browser.
+      </canvas>
+  </div>
 
-    <p>This simulation is based on Isaac Newton's famous thought experiment and illustration of firing a projectile from a high mountaintop on Earth. If the sideways velocity is high enough, the cannonball will orbit the Earth.</p>
+  <div style="text-align: center;">
+      <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
+      Interkinetic movement = <span id="speedReadout">10</span>
+      <input type="range" id="speedSlider" min="0" max="50" step="1" value="10" oninput="showSpeed();" onchange="showSpeed();">
+  </div>
 
-    <a href="https://www.youtube.com/user/jebjosh369" style="color:white">Best YouTube channel in the world.</a>
+  <p>This is a simulation of the neuroepithelia that makes up the tissue of the developing neural tube.</p>
 
-    <script>
-        var theCanvas = document.getElementById("theCanvas");
-        var theContext = theCanvas.getContext("2d");
-
-        // Draw planet
-        theContext.arc(theCanvas.width / 2, theCanvas.height / 2, 177, 0, 2 * Math.PI);
-        planetCol = "rgb(150, 255, 150)";
-        theContext.fillStyle = planetCol;
-        theContext.fill();
-
-        var x, y, vx, vy, timer; // Declare global variables
-        var speedSlider = document.getElementById("speedSlider");
-        var speedReadout = document.getElementById("speedReadout");
-        var earthRadius = 6371000; // meters
-        var mountainHeight = earthRadius * 0.165; // chosen to match image
-
-
-
-
-
-        function showSpeed() {
-            speedReadout.innerHTML = speedSlider.value;
-        }
-
-        function fireProjectile() {
-            window.clearTimeout(timer);
-            x = 0;
-            y = earthRadius + mountainHeight;
-            vx = Number(speedSlider.value);
-            vy = 0;
-            moveProjectile();
-        }
-
-        function drawProjectile(pixelX, pixelY) {
-            theContext.clearRect(0, 0, theCanvas.width, theCanvas.height);
-            // Draw planet
-            theContext.beginPath();
-            theContext.arc(theCanvas.width / 2, theCanvas.height / 2, 177, 0, 2 * Math.PI);
-            theContext.fillStyle = planetCol;
-            theContext.fill();
-            theContext.beginPath();
-            theContext.arc(pixelX, pixelY, 5, 0, 2 * Math.PI);
-            theContext.fillStyle = "white";
-
-            theContext.fill();
-        }
-
-        function moveProjectile() {
-
-            var newtonG = 6.67e-11; // grav. constant in SI units
-            var earthMass = 5.97e24; // kilograms
-            var dt = 10; // time step in seconds
-            var r = Math.sqrt(x * x + y * y);
-
-            if (r > earthRadius) {
-
-                var accel = newtonG * earthMass / (r * r); // magnitude of a
-
-                var ax = -accel * x / r;
-                var ay = -accel * y / r;
-                vx += ax * dt;
-                vy += ay * dt;
-                x += vx * dt;
-                y += vy * dt;
-                var metersPerPixel = earthRadius / (0.355 * theCanvas.width);
-                var pixelX = theCanvas.width / 2 + x / metersPerPixel;
-                var pixelY = theCanvas.height / 2 - y / metersPerPixel;
-                console.log(x);
-                // x += 1;
-                // x = 200;
-                // y = 200;
-                drawProjectile(pixelX, pixelY);
-                timer = window.setTimeout(moveProjectile, 1000 / 60);
-            }
-        }
-    </script>
+  <script src="canvas.js"></script>
 
 </body>
-
 </html>
