@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interkinetic nuclear migration</title>
 
+  <link rel="stylesheet" href="style.css">
   <!-- <style type="text/css">
     canvas{
       /* border: 1px solid black; */
@@ -35,6 +36,24 @@
       <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
       Interkinetic movement = <span id="speedReadout">10</span>
       <input type="range" id="speedSlider" min="0" max="50" step="1" value="10" oninput="showSpeed();" onchange="showSpeed();">
+  </div>
+
+  <p>Lateral inhibition signalling distance (min and max)</p>
+
+  <div class="container">
+    <div class = "min-value numberVal">
+      <input type="number" min="0" max="10" value="4" step="0.1" disabled>
+    </div>
+    &nbsp; -
+    <div class = "range-slider">
+      <div class="progress"></div>
+      <input type="range" class="range-min" id="minSliderVal" min="0" max="10" value="4" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
+      <input type="range" class="range-max" id="maxSliderVal" min="0" max="10" value="6" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
+    </div>
+    - &nbsp;
+    <div class="max-value numberVal">
+      <input type="number" min="0" max="10" value="6" step="0.1" disabled>
+    </div>
   </div>
 
   <p>This is a simulation of the neuroepithelia that makes up the tissue of the developing neural tube.</p>

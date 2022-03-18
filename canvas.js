@@ -10,6 +10,7 @@
 // At wall send other way
 // Random IKM param per cell
 // Use D3.js to graph outputs
+//Get a good colourmap
 
 // var canvas = document.querySelector('canvas');
 // var c = canvas.getContext("2d"); // c is context
@@ -29,10 +30,45 @@ h = canvas.height;
 // canvas.width = w;
 // canvas.height = h;
 
+const range = document.querySelectorAll(".range-slider input");
+progress = document.querySelector(".range-slider .progress");
+let gap = 0.5;
+const inputValue = document.querySelectorAll(".numberVal input");
+
+
+
+
+range.forEach(input => {
+  input.addEventListener("input", e =>{
+    let minrange = parseFloat(range[0].value),
+    maxrange = parseFloat(range[1].value);
+    
+    if(maxrange - minrange < gap){
+      if(e.target.className === "range-min"){
+        range[0].value = maxrange - gap;
+      }
+      else{
+        range[1].value = minrange + gap;
+      }
+    }
+    else{
+      progress.style.left = (minrange / range[0].max) * 100 + '%';
+      progress.style.right = 100 - (maxrange / range[1].max) * 100 + '%';
+      inputValue[0].value = minrange;
+      inputValue[1].value = maxrange;
+    }
+
+
+  })
+})
+
+
+
+
 var particles = [];
-const N = 400;
+const N = 600;
 // const IKM = 15; // How large the noise term is in left-right IKNM
-const radius = 8; // size of particles
+const radius = 6; // size of particles
 const dt = 0.1; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
@@ -45,9 +81,17 @@ const springDist = 3*radius;;
 const R = 20; // A=k/m for particle repulsion 
 
 const mu = 0.1;
-const pRate = 8; // rate of lateral inhibition kinetics
-const LIDistMax = 6*radius;
-const LIDistMin = 4*radius;
+const pRate = 6; // rate of lateral inhibition kinetics
+
+LIDistMin = Number(range[0].value)*radius;
+LIDistMax = Number(range[1].value)*radius;
+function updateMinMax() {
+  LIDistMin = Number(minSliderVal.value)*radius;
+  LIDistMax = Number(maxSliderVal.value)*radius;
+
+}
+// const LIDistMax = 3*radius;
+// const LIDistMin = 0*radius;
 
 IKM = Number(speedSlider.value);
 function showSpeed() {
@@ -112,7 +156,7 @@ function animate(){
     
     particles[i].update(particles, i);
     particles[i].lateralInhibition(particles,i);
-    particles[i].draw("proteinBRW",i);
+    particles[i].draw("proteinGrey",i);
   }
 
 }
@@ -323,7 +367,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     if (numNeigh>0){
       meanP = pSum/numNeigh;
       // this.p += pRate*((1 - this.x/w)/(1+meanP*meanP*meanP) - mu*this.p)*dt;
-      this.p += pRate*(1/(1+meanP*meanP*meanP) - mu*this.p)*dt;
+      this.p += pRate*(1/(1+meanP*meanP*meanP) - mu*this.p)*dt + 0.1*(Math.random()-0.5);
 
     }
 
