@@ -1,7 +1,7 @@
 // To do: 
 // Boundary conditions                           DONE
 // Some particles dont interact                  DONE
-// Add sliders
+// Add sliders - add min and max for interaction distance - time step - grid size
 // Click to drag a particles x0, y0 position
 // Starting positions                            DONE
 // Anisotropic spring/damping values             DONE
@@ -166,7 +166,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     }
 
     if(colourType == "proteinBRW"){
-      pMax = 2;
+      pMax = 6;
       rVal = 255*this.p/pMax;
       bVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
       gVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
@@ -176,7 +176,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     }
 
     if(colourType == "proteinGrey"){
-      pMax = 2;
+      pMax = 3;
       colVal = 255*this.p/pMax;
       
       // bVal = 50* aMag/aMax + 100;
