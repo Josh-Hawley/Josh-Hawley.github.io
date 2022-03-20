@@ -11,6 +11,7 @@
 // Random IKM param per cell
 // Use D3.js to graph outputs
 //Get a good colourmap
+// Mouse increases expression in a given area
 
 // var canvas = document.querySelector('canvas');
 // var c = canvas.getContext("2d"); // c is context
@@ -66,7 +67,7 @@ range.forEach(input => {
 
 
 var particles = [];
-const N = 600;
+const N = 700;
 // const IKM = 15; // How large the noise term is in left-right IKNM
 const radius = 6; // size of particles
 const dt = 0.1; // time step
@@ -74,29 +75,36 @@ const dt = 0.1; // time step
 
 const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
   x: 2,
-  y: 10
+  y: 13
 }
 
 const springDist = 3*radius;;
 const R = 20; // A=k/m for particle repulsion 
 
-const mu = 0.1;
-const pRate = 6; // rate of lateral inhibition kinetics
+const mu = 0.1; // Degredation rate
 
-LIDistMin = Number(range[0].value)*radius;
-LIDistMax = Number(range[1].value)*radius;
+
+LIDistMin = Number(range[0].value)*2*radius;
+LIDistMax = Number(range[1].value)*2*radius;
 function updateMinMax() {
-  LIDistMin = Number(minSliderVal.value)*radius;
-  LIDistMax = Number(maxSliderVal.value)*radius;
+  LIDistMin = Number(minSliderVal.value)*2*radius;
+  LIDistMax = Number(maxSliderVal.value)*2*radius;
 
 }
 // const LIDistMax = 3*radius;
 // const LIDistMin = 0*radius;
 
-IKM = Number(speedSlider.value);
-function showSpeed() {
-  speedReadout.innerHTML = speedSlider.value;
-  IKM = Number(speedSlider.value);
+var IKM = Number(IKMSlider.value);
+function showIKM() {
+  IKMReadout.innerHTML = IKMSlider.value;
+  IKM = Number(IKMSlider.value);
+}
+
+var LIRate = 40; // rate of lateral inhibition kinetics
+LIRate = Number(LIRateSlider.value);
+function showLIRate() {
+  LIRateReadout.innerHTML = LIRateSlider.value;
+  LIRate = Number(LIRateSlider.value);
 }
 
 
@@ -366,8 +374,18 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     // console.log(pSum);
     if (numNeigh>0){
       meanP = pSum/numNeigh;
-      // this.p += pRate*((1 - this.x/w)/(1+meanP*meanP*meanP) - mu*this.p)*dt;
-      this.p += pRate*(1/(1+meanP*meanP*meanP) - mu*this.p)*dt + 0.1*(Math.random()-0.5);
+      // this.p += LIRate*((1 - this.x/w)/(1+meanP*meanP*meanP) - mu*this.p)*dt;
+      let dp = LIRate*(1/(1+meanP*meanP*meanP) - mu*this.p);
+      this.p += dp*dt + Math.sqrt(Math.abs(dp*dt))*(Math.random()-0.5);
+
+      if (this.p < 0){
+        this.p = 0;
+      }
+      // console.log("meanP = " + 1/(1+meanP*meanP*meanP));
+      // console.log("mu*this.p = " + mu*this.p);
+      // console.log(1/(1+meanP*meanP*meanP) - mu*this.p);
+      
+      // console.log(Math.sqrt(dp*dt));
 
     }
 
