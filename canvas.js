@@ -67,9 +67,9 @@ range.forEach(input => {
 
 
 var particles = [];
-const N = 700;
+const N = 580;
 // const IKM = 15; // How large the noise term is in left-right IKNM
-const radius = 6; // size of particles
+const radius = 12; // size of particles
 const dt = 0.1; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
@@ -199,43 +199,56 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
 
   this.draw = function(colourType,i) {
 
-    if(colourType == "acceleration"){
-      aMag = Math.sqrt(this.ax*this.ax + this.ay*this.ay);
-      // aMag = Math.sqrt((this.x0 - this.x)*(this.x0 - this.x));
-      aMax = 60;
-      rVal = 255*aMag/aMax;
-      bVal = 50* (aMag*aMag)/(aMax*aMax) + 100;
-      gVal = 50* (aMag*aMag)/(aMax*aMax) + 100;
-      // bVal = 50* aMag/aMax + 100;
-      // gVal = 50* aMag/aMax + 100;
-      this.colour = "rgb("+ rVal +", "+ bVal +", "+ gVal +")";
-    }
+    // if(colourType == "acceleration"){
+    //   aMag = Math.sqrt(this.ax*this.ax + this.ay*this.ay);
+    //   // aMag = Math.sqrt((this.x0 - this.x)*(this.x0 - this.x));
+    //   aMax = 60;
+    //   rVal = 255*aMag/aMax;
+    //   bVal = 50* (aMag*aMag)/(aMax*aMax) + 100;
+    //   gVal = 50* (aMag*aMag)/(aMax*aMax) + 100;
+    //   // bVal = 50* aMag/aMax + 100;
+    //   // gVal = 50* aMag/aMax + 100;
+    //   this.colour = "rgb("+ rVal +", "+ bVal +", "+ gVal +")";
+    // }
     
-    if(colourType == "indexGrey"){
-      colVal = 255*i/N;
-      this.colour = "rgb("+ colVal +", "+ colVal +","+ colVal +")";
+    // if(colourType == "indexGrey"){
+    //   colVal = 255*i/N;
+    //   this.colour = "rgb("+ colVal +", "+ colVal +","+ colVal +")";
 
-    }
+    // }
 
-    if(colourType == "proteinBRW"){
-      pMax = 6;
-      rVal = 255*this.p/pMax;
-      bVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
-      gVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
-      // bVal = 50* aMag/aMax + 100;
-      // gVal = 50* aMag/aMax + 100;
-      this.colour = "rgb("+ rVal +", "+ bVal +", "+ gVal +")";
-    }
+    // if(colourType == "proteinBRW"){
+    //   pMax = 6;
+    //   rVal = 255*this.p/pMax;
+    //   bVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
+    //   gVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
+    //   // bVal = 50* aMag/aMax + 100;
+    //   // gVal = 50* aMag/aMax + 100;
+    //   this.colour = "rgb("+ rVal +", "+ bVal +", "+ gVal +")";
+    // }
 
-    if(colourType == "proteinGrey"){
-      pMax = 3;
-      colVal = 255*this.p/pMax;
+    // if(colourType == "proteinGrey"){
+    //   pMax = 3;
+    //   colVal = 205*this.p/pMax +40;
       
-      // bVal = 50* aMag/aMax + 100;
-      // gVal = 50* aMag/aMax + 100;
-      this.colour = "rgb("+ colVal +", "+ colVal +", "+ colVal +")";
-    }
+    //   // bVal = 50* aMag/aMax + 100;
+    //   // gVal = 50* aMag/aMax + 100;
+    //   this.colour = "rgb("+ colVal +", "+ colVal +", "+ colVal +")";
+    // }
 
+    pMax = 10;
+    normP = this.p/pMax;
+    if (this.p > pMax){
+      normP = 1;
+    } 
+    // console.log(normP);
+    colVals = evaluate_cmap(normP, 'RdYlBu', true);
+    // colVals = evaluate_cmap(normP, 'Spectral', true);
+    // colVals = evaluate_cmap(normP, 'viridis', false);
+    // colVals = evaluate_cmap(normP, 'cubehelix', false);
+    // colVals = evaluate_cmap(normP, 'gist_stern', false);
+    
+    this.colour = "rgb("+ Number(colVals[0]) +", "+ Number(colVals[1]) +", "+ Number(colVals[2]) +")";
     
 
     c.beginPath();
@@ -272,8 +285,8 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     this.x  += this.vx*dt;
     this.y  += this.vy*dt;
 
-    this.x0 += 0.1*this.vx*dt;
-    this.y0 += 0.1*this.vy*dt;
+    this.x0 += 0.01*this.vx*dt;
+    this.y0 += 0.01*this.vy*dt;
 
     
 
