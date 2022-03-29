@@ -12,6 +12,7 @@
 // Use D3.js to graph outputs
 //Get a good colourmap
 // Mouse increases expression in a given area
+// Angle dependent protrusions
 
 // var canvas = document.querySelector('canvas');
 // var c = canvas.getContext("2d"); // c is context
@@ -36,8 +37,9 @@ progress = document.querySelector(".range-slider .progress");
 let gap = 0.5;
 const inputValue = document.querySelectorAll(".numberVal input");
 
-
-
+// Protrusion parameters
+const contactTimeMax = 10;
+const probInteract = 0.005;
 
 range.forEach(input => {
   input.addEventListener("input", e =>{
@@ -63,13 +65,81 @@ range.forEach(input => {
   })
 })
 
+var mouse = {
+  x: undefined,
+  y: undefined
+}
+
+window.addEventListener("mousemove", function(event){
+  mouse.x = event.layerX
+  mouse.y = event.layerY
+  // window.addEventListener("mousedown", function(event){
+  //   mouse.x = event.layerX
+  //   mouse.y = event.layerY
+  
+  //   for (i = 0; i<N; i++){
+  //     let dXmouse = particles[i].x - mouse.x;
+  //     let dYmouse = particles[i].y - mouse.y;
+  //     let mouseDist = Math.sqrt(dXmouse*dXmouse + dYmouse*dYmouse);
+  //       // console.log(this.y)
+  //       if (mouseDist < radius){
+  //         particles[i].x = mouse.x;
+  //         particles[i].y = mouse.y;
+  //         particles[i].x0 = mouse.x;
+  //         particles[i].y0 = mouse.y;
+  //       }
+  
+        
+        
+  //     }
+    
+    
+  //   // console.log(event);
+  // })
+})
+
+// window.addEventListener("mousedown", function(event){
+
+//   console.log('Clicked');
+//   // find a cell that the mouse overlaps with
+//   while (i<N){
+//       let dXmouse = particles[i].x - mouse.x;
+//       let dYmouse = particles[i].y - mouse.y;
+//       let mouseDist = Math.sqrt(dXmouse*dXmouse + dYmouse*dYmouse);
+
+//       if (mouseDist < radius){
+//         dragging = true;
+//         dragCellIdx = i;
+//         console.log('dragCellIdx: ' + dragCellIdx);
+//         break;
+//       }
+//       i++;
+//       console.log(i);
+//   }
+// })
+
+
+  
+ 
 
 
 
+
+
+
+
+
+// function logThatShit(){
+//  console.log('The mouse is down!');
+// }
+
+
+let dragging = false;
+var dragCellIdx = -1;
 var particles = [];
-const N = 580;
+const N = 300;
 // const IKM = 15; // How large the noise term is in left-right IKNM
-const radius = 12; // size of particles
+const radius = 15; // size of particles
 const dt = 0.1; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
@@ -78,7 +148,7 @@ const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped s
   y: 13
 }
 
-const springDist = 3*radius;;
+const springDist = 2.8*radius;;
 const R = 20; // A=k/m for particle repulsion 
 
 const mu = 0.1; // Degredation rate
@@ -149,6 +219,32 @@ for (let i = 0; i < N; i++) {
 // )
 
 
+window.addEventListener("mousedown", findCell, false);
+
+window.addEventListener("mouseup", e => {
+  dragging = false;
+}, false);
+
+function findCell(){
+  
+  let i = 0;
+  // find a cell that the mouse overlaps with
+  while (i<N){
+      let dXmouse = particles[i].x - mouse.x;
+      let dYmouse = particles[i].y - mouse.y;
+      let mouseDist = Math.sqrt(dXmouse*dXmouse + dYmouse*dYmouse);
+
+      if (mouseDist < radius){
+        dragging = true;
+        dragCellIdx = i;
+        break;
+      }
+      i++;
+  }
+}
+
+
+
 animate();
 
 
@@ -165,6 +261,13 @@ function animate(){
     particles[i].update(particles, i);
     particles[i].lateralInhibition(particles,i);
     particles[i].draw("proteinGrey",i);
+
+    // canvas.addEventListener("mousedown", function(downEvent){
+    //   banana = downEvent.layerX
+    //   // particles[i].moveParticle();
+      
+    // })
+    // canvas.addEventListener("mousedown", particles[i].moveParticle());
   }
 
 }
@@ -179,23 +282,27 @@ function animate(){
 //   mouse.y = event.y
 // })
 
-function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
-  this.x = x;
-  this.y = y;
-  this.x0 = x0;
-  this.y0 = y0;
-  this.vx = vx;
-  this.vy = vy;
-  this.radius = radius;
-  this.colour = colour;
-  // this.colour = 'white';
-  this.ax = 0;
-  this.ay = 0;
-  this.B = B;
+function Particle (x, y, x0, y0, vx, vy, B, radius){
+  this.x = x;           // x-position of cell
+  this.y = y;           // y-position of cell
+  this.x0 = x0;         // Desired x-location of cell (spring restoring force to this location)
+  this.y0 = y0;         // Desired y-location of cell (spring restoring force to this location)
+  this.vx = vx;         // x velocity
+  this.vy = vy;         // y velocity
+  this.ax = 0;          // x acceleration
+  this.ay = 0;          // y acceleration
+  
+  this.B = B;           // Object that contains x and y spring/damping ratio constants
+  this.radius = radius; // Radius of particle
+  this.p = Math.random(); // Initial protein expresion
+  
+  this.contactTime = [];
+  for(let n = 0; n < N; n++){
+    this.contactTime.push(0);
+  }
 
-  this.p = Math.random();
-
-
+  // canvas.addEventListener("mousedown", this.moveParticle());
+  
 
   this.draw = function(colourType,i) {
 
@@ -242,7 +349,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
       normP = 1;
     } 
     // console.log(normP);
-    colVals = evaluate_cmap(normP, 'RdYlBu', true);
+    colVals = evaluate_cmap(normP, 'RdYlBu', true); // Colourmaps documentation at https://github.com/timothygebhard/js-colormaps
     // colVals = evaluate_cmap(normP, 'Spectral', true);
     // colVals = evaluate_cmap(normP, 'viridis', false);
     // colVals = evaluate_cmap(normP, 'cubehelix', false);
@@ -260,8 +367,6 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     c.fill();
   }
 
-
-
   this.update = function(particles, i) {
 
     if (i == 0){
@@ -272,8 +377,21 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
       
     }
 
-    this.ax += -this.B.x*this.vx - (this.x - this.x0);
-    this.ay += -this.B.y*this.vy - (this.y - this.y0);
+    if(dragCellIdx == i && dragging){
+      this.x = mouse.x;
+      this.y = mouse.y;
+      this.x0 = mouse.x;
+      this.y0 = mouse.y;
+      // this.ax += -0.3*this.vx - (this.x - this.x0);
+      // this.ay += -0.3*this.vy - (this.y - this.y0);
+
+      
+      // if mouse is down identify which was the particle that was under the mouse click and keep updating it
+    } 
+      this.ax += -this.B.x*this.vx - (this.x - this.x0);
+      this.ay += -this.B.y*this.vy - (this.y - this.y0);
+    
+
     // this.ax = -this.B.x*this.vx;
     // this.ay = -this.B.y*this.vy;
 
@@ -285,8 +403,12 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
     this.x  += this.vx*dt;
     this.y  += this.vy*dt;
 
-    this.x0 += 0.01*this.vx*dt;
+    this.x0 += 0.01*this.vx*dt; // Allow drift of position to avoid crowding
     this.y0 += 0.01*this.vy*dt;
+
+ 
+
+    
 
     
 
@@ -374,22 +496,44 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
 
           let dy = other.y - this.y;
           let r = Math.sqrt(dx*dx + dy*dy);
-
+          
 
           if (r > LIDistMin && r < LIDistMax){
-            numNeigh++;
-            pSum += other.p;
-            // console.log(pSum);
+            if (Math.random()<probInteract || this.contactTime[j] > 0){
+              numNeigh++;
+              pSum += other.p;
+              this.contactTime[j] = this.contactTime[j] + dt;
+              if (this.contactTime[j] > contactTimeMax){
+                this.contactTime[j] = 0
+              }
+
+              if (i == N-1){ // Draw protrusions for 1 cell
+                c.strokeStyle = 'white';
+                c.lineWidth = 2;
+                c.beginPath();
+                c.moveTo(this.x, this.y);
+                c.lineTo(other.x, other.y);
+                c.stroke();
+
+                c.beginPath();
+                c.arc(other.x, other.y, 5, 0, Math.PI*2);
+                c.fillStyle = 'black';
+                c.fill();
+                c.stroke();
+                
+              }
+
+            }
+
           }
-        // }
       }
     }
-    // console.log(pSum);
+
     if (numNeigh>0){
       meanP = pSum/numNeigh;
       // this.p += LIRate*((1 - this.x/w)/(1+meanP*meanP*meanP) - mu*this.p)*dt;
       let dp = LIRate*(1/(1+meanP*meanP*meanP) - mu*this.p);
-      this.p += dp*dt + Math.sqrt(Math.abs(dp*dt))*(Math.random()-0.5);
+      this.p += dp*dt + Math.sqrt(Math.abs(dp*dt))*(Math.random()-0.5); // Euler-Maryuma method to solve SDE
 
       if (this.p < 0){
         this.p = 0;
@@ -404,6 +548,20 @@ function Particle (x, y, x0, y0, vx, vy, B, radius, colour){
 
 
   }
+
+  // this.moveParticle = function(){
+  //   let dXmouse = this.x - mouse.x;
+  //   let dYmouse = this.y - mouse.y;
+  //   let mouseDist = Math.sqrt(dXmouse*dXmouse + dYmouse*dYmouse);
+  //   // console.log(this.y)
+  //   if (mouseDist < radius){
+  //     this.x = mouse.x;
+  //     this.y = mouse.y;
+  //     this.x0 = mouse.x;
+  //     this.y0 = mouse.y;
+  //   }
+    
+  // }
 
 }   
 
