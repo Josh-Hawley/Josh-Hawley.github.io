@@ -17,6 +17,7 @@
 // var canvas = document.querySelector('canvas');
 // var c = canvas.getContext("2d"); // c is context
 var canvas = document.getElementById("theCanvas");
+console.log(canvas);
 var c = theCanvas.getContext("2d");
 
 var speedSlider = document.getElementById("speedSlider");
@@ -25,6 +26,8 @@ var speedReadout = document.getElementById("speedReadout");
 // canvas.width = 300;
 w = canvas.width;
 h = canvas.height;
+
+
 // w = window.innerWidth;
 // h = window.innerHeight;
 // let w = 300;
@@ -73,65 +76,15 @@ var mouse = {
 window.addEventListener("mousemove", function(event){
   mouse.x = event.layerX
   mouse.y = event.layerY
-  // window.addEventListener("mousedown", function(event){
-  //   mouse.x = event.layerX
-  //   mouse.y = event.layerY
-  
-  //   for (i = 0; i<N; i++){
-  //     let dXmouse = particles[i].x - mouse.x;
-  //     let dYmouse = particles[i].y - mouse.y;
-  //     let mouseDist = Math.sqrt(dXmouse*dXmouse + dYmouse*dYmouse);
-  //       // console.log(this.y)
-  //       if (mouseDist < radius){
-  //         particles[i].x = mouse.x;
-  //         particles[i].y = mouse.y;
-  //         particles[i].x0 = mouse.x;
-  //         particles[i].y0 = mouse.y;
-  //       }
-  
-        
-        
-  //     }
-    
-    
-  //   // console.log(event);
-  // })
+})
+canvas.addEventListener("touchmove", function(event){
+  var touch = event.touches[0];
+  console.log(touch);
+  mouse.x = touch.clientX - canvas.offsetLeft
+  mouse.y = touch.clientY - canvas.offsetTop
 })
 
-// window.addEventListener("mousedown", function(event){
 
-//   console.log('Clicked');
-//   // find a cell that the mouse overlaps with
-//   while (i<N){
-//       let dXmouse = particles[i].x - mouse.x;
-//       let dYmouse = particles[i].y - mouse.y;
-//       let mouseDist = Math.sqrt(dXmouse*dXmouse + dYmouse*dYmouse);
-
-//       if (mouseDist < radius){
-//         dragging = true;
-//         dragCellIdx = i;
-//         console.log('dragCellIdx: ' + dragCellIdx);
-//         break;
-//       }
-//       i++;
-//       console.log(i);
-//   }
-// })
-
-
-  
- 
-
-
-
-
-
-
-
-
-// function logThatShit(){
-//  console.log('The mouse is down!');
-// }
 
 
 let dragging = false;
@@ -220,8 +173,12 @@ for (let i = 0; i < N; i++) {
 
 
 window.addEventListener("mousedown", findCell, false);
+window.addEventListener("touchstart", findCell, false);
 
 window.addEventListener("mouseup", e => {
+  dragging = false;
+}, false);
+window.addEventListener("touchend", e => {
   dragging = false;
 }, false);
 
