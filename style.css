@@ -1,20 +1,22 @@
 body{
   margin: 0;
-  padding: 0;
+  padding: 0px;
   display: grid;
-  place-items: center;
+  /* place-items: center; */
   min-height: 100vh;
 }
 
-.container{
+.container {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
-  width: 800px;
+  width: 700px;
   height: 50px;
   background: rgb(3, 31, 36);
   border-radius: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .container input[type="number"]{
@@ -36,18 +38,20 @@ body{
 .container .range-slider{
   position: relative;
   width: 200px;
-  height: 5px;
-  background: #ddd;
+  height: 7px;
+  background: #EFEFEF;
+  /* border: 1px solid #B2B2B2; */
   outline: none;
   top: 1px;
   margin: 10px;
+  border-radius: 5px;
 }
 
 .container .range-slider .progress{
   left: 40%;
   right: 40%;
   height: 100%;
-  background: #ee5252;
+  background: #0075FF;
   border-radius: 50px;
   position: absolute;
 }
@@ -68,6 +72,41 @@ body{
   -webkit-appearance: none;
   width: 17px;
   height: 17px;
-  background: #ee5252;
+  background: #0075FF;
   border-radius: 50px;
 }
+
+/* Two column styling */
+
+*{
+  box-sizing: border-box;
+}
+
+.columns {
+  float: left;
+  width: 50%;
+  padding: 12px;
+  min-height: 300px;
+}
+
+.rows:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 800px){
+  .columns{
+    width: 100%;
+  }
+}
+
+
+
+/* Standard sliders */
+
+.standardSlider{
+  text-align: right;
+  padding: 10px;
+}
+

@@ -1,8 +1,8 @@
 // To do: 
 // Boundary conditions                           DONE
 // Some particles dont interact                  DONE
-// Add sliders - add min and max for interaction distance - time step - grid size
-// Click to drag a particles x0, y0 position
+// Add sliders                                   DONE
+// Click to drag a particles x0, y0 position     DONE
 // Starting positions                            DONE
 // Anisotropic spring/damping values             DONE
 // Add lateral inhibition                        DONE
@@ -13,6 +13,9 @@
 //Get a good colourmap
 // Mouse increases expression in a given area
 // Angle dependent protrusions
+//Double check protrusions are bidirectional signalling
+// Sort bug when dragged cell goes beyond edge of sim
+// Add kymograph visualisation
 
 // var canvas = document.querySelector('canvas');
 // var c = canvas.getContext("2d"); // c is context
@@ -40,9 +43,7 @@ progress = document.querySelector(".range-slider .progress");
 let gap = 0.5;
 const inputValue = document.querySelectorAll(".numberVal input");
 
-// Protrusion parameters
-const contactTimeMax = 10;
-const probInteract = 0.005;
+
 
 range.forEach(input => {
   input.addEventListener("input", e =>{
@@ -90,9 +91,9 @@ canvas.addEventListener("touchmove", function(event){
 let dragging = false;
 var dragCellIdx = -1;
 var particles = [];
-const N = 300;
+const N = 400;
 // const IKM = 15; // How large the noise term is in left-right IKNM
-const radius = 15; // size of particles
+const radius = Math.sqrt((w*h)/(6*N)); // size of particles
 const dt = 0.1; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
@@ -104,7 +105,7 @@ const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped s
 const springDist = 2.8*radius;;
 const R = 20; // A=k/m for particle repulsion 
 
-const mu = 0.1; // Degredation rate
+
 
 
 LIDistMin = Number(range[0].value)*2*radius;
@@ -130,6 +131,27 @@ function showLIRate() {
   LIRate = Number(LIRateSlider.value);
 }
 
+// Protrusion parameters
+var contactTimeMax = 50;
+contactTimeMax = Number(contactTimeSlider.value);
+function showContactTime() {
+  contactTimeReadout.innerHTML = contactTimeSlider.value;
+  contactTimeMax = Number(contactTimeSlider.value);
+}
+
+var probInteract = 0.0005;
+probInteract = Number(probInteractSlider.value);
+function showProbInteract() {
+  probInteractReadout.innerHTML = probInteractSlider.value;
+  probInteract = Number(probInteractSlider.value);
+}
+
+var mu = 0.1; // Degredation rate
+mu = Number(muSlider.value);
+function showMu() {
+  muReadout.innerHTML = muSlider.value;
+  mu = Number(muSlider.value);
+}
 
 const Nrow = h/(3*radius);
 const Ncol = N/Nrow;
@@ -151,8 +173,8 @@ for (let i = 0; i < N; i++) {
   // x = springDist + colPos + 3*(Math.random()-0.5);
   // y = springDist + rowPos + 3*(Math.random()-0.5);
 
-  var vx = 300*(Math.random() - 0.5);
-  var vy = 300*(Math.random() - 0.5);
+  var vx = 0;
+  var vy = 0;
 
   var x0 = x;
   var y0 = y;
@@ -345,10 +367,10 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
       
       // if mouse is down identify which was the particle that was under the mouse click and keep updating it
     } 
-      this.ax += -this.B.x*this.vx - (this.x - this.x0);
-      this.ay += -this.B.y*this.vy - (this.y - this.y0);
-    
 
+    this.ax += -this.B.x*this.vx - (this.x - this.x0);
+    this.ay += -this.B.y*this.vy - (this.y - this.y0);
+    
     // this.ax = -this.B.x*this.vx;
     // this.ay = -this.B.y*this.vy;
 
@@ -460,8 +482,10 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
               numNeigh++;
               pSum += other.p;
               this.contactTime[j] = this.contactTime[j] + dt;
+              other.contactTime[i] = other.contactTime[i] +dt;
               if (this.contactTime[j] > contactTimeMax){
-                this.contactTime[j] = 0
+                this.contactTime[j] = 0;
+                other.contactTime[i] = 0;
               }
 
               if (i == N-1){ // Draw protrusions for 1 cell
@@ -473,7 +497,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
                 c.stroke();
 
                 c.beginPath();
-                c.arc(other.x, other.y, 5, 0, Math.PI*2);
+                c.arc(other.x, other.y, radius/2, 0, Math.PI*2);
                 c.fillStyle = 'black';
                 c.fill();
                 c.stroke();
@@ -491,7 +515,6 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
       // this.p += LIRate*((1 - this.x/w)/(1+meanP*meanP*meanP) - mu*this.p)*dt;
       let dp = LIRate*(1/(1+meanP*meanP*meanP) - mu*this.p);
       this.p += dp*dt + Math.sqrt(Math.abs(dp*dt))*(Math.random()-0.5); // Euler-Maryuma method to solve SDE
-
       if (this.p < 0){
         this.p = 0;
       }
