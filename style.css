@@ -4,12 +4,49 @@ body{
   display: grid;
   /* place-items: center; */
   min-height: 100vh;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+  font-size:15px; 
+  width:innerWidth; 
+  margin-left:auto; 
+  margin-right:auto; 
+  background-color:rgb(3, 31, 36); 
+  color: rgb(231, 251, 255);
 }
 
+header {
+  /* background-color: #e2e2e2; */
+  padding: 0px;
+  max-height: 100px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.nav {
+  margin: 0;
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+
+.nav li {
+  display: inline-block;
+}
+
+.nav a {
+  color: white;
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  background-color: rgb(99, 94, 92);
+  border-radius: 4px;
+}
+/* Styling two point slider */
 .container {
   position: relative;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
   width: 700px;
   height: 50px;
@@ -76,6 +113,51 @@ body{
   border-radius: 50px;
 }
 
+
+
+
+
+.container .range-slider2{
+  position: relative;
+  width: 200px;
+  height: 7px;
+  background: #EFEFEF;
+  /* border: 1px solid #B2B2B2; */
+  outline: none;
+  top: 1px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.container .range-slider2 .progress{
+  left: 40%;
+  right: 40%;
+  height: 100%;
+  background: #0075FF;
+  border-radius: 50px;
+  position: absolute;
+}
+
+.container .range-slider2 input[type="range"]{
+  position: absolute;
+  top: -8px;
+  left: -5px;
+  width: 101%;
+  -webkit-appearance: none;
+  pointer-events: none;
+  background: none;
+  outline: none;
+}
+
+.container .range-slider2 input::-webkit-slider-thumb{
+  pointer-events: auto;
+  -webkit-appearance: none;
+  width: 17px;
+  height: 17px;
+  background: #0075FF;
+  border-radius: 50px;
+}
+
 /* Two column styling */
 
 *{
@@ -87,6 +169,7 @@ body{
   width: 50%;
   padding: 12px;
   min-height: 300px;
+  border-color: azure; border: 1px;
 }
 
 .rows:after {

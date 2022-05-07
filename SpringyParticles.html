@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Springy particles simulation</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<header>
+  <h1>Josh Hawley</h1>
+  <nav>
+    <ul class="nav">
+      <li> <a href="index.html">Home</a> </li>
+      <li> <a href="NeuralTube.html">Neural tube simulation</a> </li>
+      <li> <a href="SpringyParticles.html">Springy particles simulation</a> </li>
+    </ul>
+  </nav>
+</header>
+
+<body style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size:15px; margin-left:0; margin-right:0; background-color:rgb(3, 31, 36); color: rgb(231, 251, 255);">
+
+  <!-- <canvas></canvas> -->
+
+  <h1 style="font-size:36px;
+  text-align:center;">Springy particles simulation</h1>
+
+  <canvas id="theCanvas" style="position: absolute;"></canvas>
+  
+
+  <div style="text-align: center; margin-top: 3px;">
+      <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
+      Interkinetic movement = <span id="IKMReadout">10</span>
+      <input type="range" id="IKMSlider" min="0" max="50" step="1" value="0" oninput="showIKM();" onchange="showIKM();" >
+  </div>
+  
+  <div style="text-align: center;">
+    <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
+    Rate of lateral inhibition reaction = <span id="LIRateReadout">10</span>
+    <input type="range" id="LIRateSlider" min="1" max="40" step="1" value="10" oninput="showLIRate();" onchange="showLIRate();" style="background-color: blueviolet;" >
+  </div>
+  
+  
+
+
+
+  <!-- <p>This is a simulation of the neuroepithelia that makes up the tissue of the developing neural tube.</p> -->
+  <script src="js-colormaps.js"></script>
+  <script src="SpringyParticlesCanvas.js"></script>
+
+</body>
+</html>

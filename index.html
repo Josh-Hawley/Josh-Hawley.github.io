@@ -4,106 +4,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interkinetic nuclear migration</title>
+  <title>Josh Hawley</title>
 
   <link rel="stylesheet" href="style.css">
-  <!-- <style type="text/css">
-    canvas{
-      /* border: 1px solid black; */
-    }
 
-    body{
-      margin: 0px;
-    }
-  </style> -->
 </head>
 
-<body style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size:15px; width:1500px; margin-left:auto; margin-right:auto; background-color:rgb(3, 31, 36); color: rgb(231, 251, 255);">
+<header>
+  <h1>Josh Hawley</h1>
+  <nav>
+    <ul class="nav">
+      <li> <a href="index.html">Home</a> </li>
+      <li> <a href="NeuralTube.html">Neural tube simulation</a> </li>
+      <li> <a href="SpringyParticles.html">Springy particles simulation</a> </li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- <canvas></canvas> -->
+<body>
 
-  
-
-  <div class="rows">
-    <h1 style="font-size:36px;
-  text-align:center;">Interkinetic nuclear migration with lateral inhibition</h1>
-
-
-
-    <div class="columns" style="padding-top: 25px;">
-      <p style="text-align: center;">Welcome to my simulation! Try clicking and dragging on the cells or messing around with the sliders below!</p>
-      <div style="border: 1px solid #ddd; border-radius: 10px;">
-
-        <div class="standardSlider">
-            <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-            Interkinetic movement = <span id="IKMReadout">10</span>
-            <input type="range" id="IKMSlider" min="0" max="50" step="1" value="10" oninput="showIKM();" onchange="showIKM();" >
-        </div>
-        
-        <div class="standardSlider">
-          <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-          Rate of lateral inhibition reaction = <span id="LIRateReadout">10</span>
-          <input type="range" id="LIRateSlider" min="1" max="40" step="1" value="10" oninput="showLIRate();" onchange="showLIRate();" style="background-color: blueviolet;" >
-        </div>
-
-        <div class="standardSlider">
-          <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-          Protein degredation rate = <span id="muReadout">0.1</span>
-          <input type="range" id="muSlider" min="0.01" max="0.5" step="0.01" value="0.1" oninput="showMu();" onchange="showMu();" >
-        </div>
-
-        <div class="standardSlider">
-          <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-          Protrusion lifetime = <span id="contactTimeReadout">50</span>
-          <input type="range" id="contactTimeSlider" min="1" max="100" step="1" value="50" oninput="showContactTime();" onchange="showContactTime();" >
-        </div>
-
-        <div class="standardSlider">
-          <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-          Probability of forming new protrusion = <span id="probInteractReadout">0.0005</span>
-          <input type="range" id="probInteractSlider" min="0.0001" max="0.01" step="0.0001" value="0.0005" oninput="showProbInteract();" onchange="showProbInteract();" >
-        </div>
+<div>
+<p>Example text</p>
+</div>
 
 
-        <div class="container">
-          <p style="text-align: left; margin: 10px;">Min signalling <br>distance between <br>cells</p> 
-          <div class = "min-value numberVal">
-            <input type="number" min="0" max="10" value="4" step="0.1" disabled>
-          </div>
-          &nbsp; 
-          <div class = "range-slider">
-            <div class="progress"></div>
-            <input type="range" class="range-min" id="minSliderVal" min="0" max="10" value="4" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
-            <input type="range" class="range-max" id="maxSliderVal" min="0" max="10" value="6" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
-          </div>
-          &nbsp;
-          <div class="max-value numberVal">
-            <input type="number" min="0" max="10" value="6" step="0.1" disabled>
-          </div>
-        <p style="text-align: right; margin: 10px;">Max signalling <br>distance between <br>cells</p>  
-        </div>
-      </div>
-      
-      
-      
-    </div>
-
-    <div class="columns">
-      <!-- <div style="width:500px; margin-left:auto; margin-right:auto; touch-action: none;"> -->
-      <div style="width:700px; touch-action: none;"></div>
-        <!-- <img src="NewtonDrawing.jpg" width="500" height="500" style="position:absolute;"> -->
-          <canvas id="theCanvas" width="700" height="700" style="position:relative;">
-            Canvas not supported; please update your browser.
-          </canvas>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- <p>This is a simulation of the neuroepithelia that makes up the tissue of the developing neural tube.</p> -->
-  <script src="js-colormaps.js"></script>
-  <script src="canvas.js"></script>
 
 </body>
 </html>
