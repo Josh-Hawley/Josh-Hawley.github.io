@@ -29,15 +29,6 @@ canvas.height = window.innerHeight;
 w = canvas.width;
 h = canvas.height;
 
-
-// w = window.innerWidth;
-// h = window.innerHeight;
-// let w = 300;
-// let h = 600;
-// canvas.width = w;
-// canvas.height = h;
-
-
 // Protrusion parameters
 const contactTimeMax = 10;
 const probInteract = 0.005;
@@ -65,9 +56,10 @@ canvas.addEventListener("touchmove", function(event){
 let dragging = false;
 var dragCellIdx = -1;
 var particles = [];
-const N = 1000;
+const N = 1500;
 // const IKM = 15; // How large the noise term is in left-right IKNM
-const radius = 10; // size of particles
+// const radius = 10; // size of particles
+const radius = Math.sqrt((w*h)/(6*N)); //Formula for filling the canvas size with the perfect number of particles
 const dt = 0.1; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
@@ -86,18 +78,19 @@ const mu = 0.1; // Degredation rate
 // const LIDistMax = 3*radius;
 // const LIDistMin = 0*radius;
 
-var IKM = Number(IKMSlider.value);
-function showIKM() {
-  IKMReadout.innerHTML = IKMSlider.value;
-  IKM = Number(IKMSlider.value);
-}
+const IKM = 0;
+// var IKM = Number(IKMSlider.value);
+// function showIKM() {
+//   IKMReadout.innerHTML = IKMSlider.value;
+//   IKM = Number(IKMSlider.value);
+// }
 
 var LIRate = 40; // rate of lateral inhibition kinetics
-LIRate = Number(LIRateSlider.value);
-function showLIRate() {
-  LIRateReadout.innerHTML = LIRateSlider.value;
-  LIRate = Number(LIRateSlider.value);
-}
+// LIRate = Number(LIRateSlider.value);
+// function showLIRate() {
+//   LIRateReadout.innerHTML = LIRateSlider.value;
+//   LIRate = Number(LIRateSlider.value);
+// }
 
 
 const Nrow = h/(3*radius);
