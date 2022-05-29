@@ -1,3 +1,9 @@
+//To do:
+// Make drag use acceleration instead of absolute position
+// Push and pop numbers of particles with slider
+// Slider for gravity strength
+// Add collisions?
+
 var canvas = document.getElementById("theCanvas");
 console.log(canvas);
 var c = theCanvas.getContext("2d");
@@ -6,9 +12,15 @@ var speedSlider = document.getElementById("speedSlider");
 var speedReadout = document.getElementById("speedReadout");
 
 // canvas.width = 300;
-widthScale = 0.5;
-heightScale = widthScale;
-canvas.width = window.innerWidth*widthScale;
+widthScale = 0.75;
+heightScale = 0.75;
+maxWidth = 800;
+if (window.innerWidth*widthScale > maxWidth){
+  canvas.width = maxWidth;
+} else{
+  canvas.width = window.innerWidth*widthScale;
+}
+// canvas.width = window.innerWidth*widthScale;
 canvas.height = window.innerHeight*heightScale;
 w = canvas.width;
 h = canvas.height;
@@ -30,33 +42,46 @@ canvas.addEventListener("touchmove", function(event){
 })
 
 
+
+
 let dragging = false;
 var dragCellIdx = -1;
 var particles = [];
-const N = 10;
-const G = 1000;
-const dt = 0.1; // time step
-const radiusScale = 0.3;
 
-const minMass = 10;
-const maxMass = 60;
+// const N = 5;
+var N = Number(sliderN.value);
+var currentN = N;
+const dt = 0.3; // time step
+const radiusScale = 0.1;
+
+
+var G = Number(sliderG.value);
+function showG() {
+  readoutG.innerHTML = sliderG.value;
+  G = Number(sliderG.value);
+}
+
+
+
+// Parameters 
+// const G = 1000;
+const minMass = 30;
+const maxMass = 100;
 const sun = true;
-const sunMass = 200;
+const sunMass = 300;
+
+// Trails parameters
+const M = 25; // Number of past positions to store
+
 
 
 for (let i = 0; i < N; i++) {
-  var x = Math.random() * w;
-  var y = Math.random() * h;
-  var vx = 0*(Math.random() );
-  var vy = 0*(Math.random() - 0.5);
-  
-  // if (sun) {
-  //   if(x > w/2){
-  //     x
-  //   }
-  // }
-
-  
+  // var x = Math.random() * w;
+  // var y = Math.random() * h;
+  var x = w*0.7*(Math.random()-0.5) + w/2;
+  var y = h*0.7*(Math.random()-0.5) + h/2;
+  var vx = 30*(Math.random() - 0.5);
+  var vy = 30*(Math.random() - 0.5);
 
   var x0 = x;
   var y0 = y;
@@ -69,10 +94,40 @@ for (let i = 0; i < N; i++) {
     vx = 0;
     vy = 0;
     m = sunMass;
-    radius = 40;
+    radius = 30;
   }
 
   particles.push(new Particle(x, y, x0, y0, vx, vy, radius, m));
+}
+
+// Add and remove particles
+function showN() {
+  readoutN.innerHTML = sliderN.value-1;
+  N = Number(sliderN.value);
+
+  if (N < currentN){
+    for (let i = 0; i < currentN-N; i++){
+      console.log(i)
+      particles.pop();
+    }
+    currentN=N;
+  }
+
+  if (N > currentN){
+    for (let i = 0; i < N-currentN; i++){
+      var x = w*0.7*(Math.random()-0.5) + w/2;
+      var y = h*0.7*(Math.random()-0.5) + h/2;
+      var vx = 30*(Math.random() - 0.5);
+      var vy = 30*(Math.random() - 0.5);
+
+      var x0 = x;
+      var y0 = y;
+      var m = (maxMass-minMass)*Math.random() + minMass;
+      var radius= m*radiusScale;
+      particles.push(new Particle(x, y, x0, y0, vx, vy, radius, m));
+    }
+    currentN=N;
+  }
 }
 
 
@@ -114,8 +169,14 @@ function animate(){
 
   requestAnimationFrame(animate);
   c.clearRect(0, 0, w, h); // clear canvas
-  canvas.width = window.innerWidth*widthScale;
+  if (window.innerWidth*widthScale > maxWidth){
+    canvas.width = maxWidth;
+  } else{
+    canvas.width = window.innerWidth*widthScale;
+  }
+  
   canvas.height = window.innerHeight*heightScale;
+  
   w = canvas.width;
   h = canvas.height;
   for(i = 0; i < N; i++){
@@ -125,7 +186,8 @@ function animate(){
     // particles[i].lateralInhibition(particles,i);
     particles[i].draw(i);
 
-      }
+    }
+
 
 }
 
@@ -146,21 +208,29 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
   this.radius = radius; // Radius of particle
   this.p = Math.random(); // Initial protein expresion
   
-  this.contactTime = [];
-  for(let n = 0; n < N; n++){
-    this.contactTime.push(0);
-  }
-
-  // canvas.addEventListener("mousedown", this.moveParticle());
+  this.xTrail = [];
+  this.yTrail = [];
+  this.trailColour = [];
+  this.trailColVals = [];
+  this.xTrail.push(this.x);
+  this.yTrail.push(this.y);
   
 
+
+//__________________________________________________________________//
+
   this.draw = function(i) {
+
+
+
+
+    
 
     aMag = Math.sqrt(this.ax*this.ax + this.ay*this.ay);
     aMax = 0.4;
     rVal = 255*aMag/aMax;
     aMag = Math.sqrt(this.ax*this.ax + this.ay*this.ay);
-    aMax = 0.1*G;
+    aMax = 0.004*G*N;
     aNorm = aMag/aMax;
     if (aMag > aMax){
       aNorm = 1;
@@ -173,6 +243,59 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
     // colVals = evaluate_cmap(aNorm, 'gist_stern', false);
     // let colVals = evaluate_cmap(aNorm, 'rainbow', true);
     
+
+        //Update trail
+    if (this.xTrail.length < M){
+      this.xTrail.push(this.x);
+
+      this.yTrail.push(this.y);
+
+      this.trailColVals.push(colVals);
+
+
+    } else {
+      this.xTrail.shift()
+      this.xTrail.push(this.x);
+
+      this.yTrail.shift()
+      this.yTrail.push(this.y);
+
+      this.trailColVals.shift();
+      this.trailColVals.push(colVals);
+      
+    }
+
+
+    // Draw trail
+    for (let m = 0; m < this.xTrail.length-1; m++){
+      
+      var x1 = this.xTrail[m];
+      var x2 = this.xTrail[m+1];
+      var y1 = this.yTrail[m];
+      var y2 = this.yTrail[m+1];
+      
+      var alpha = m/(this.xTrail.length-1);
+      // console.log(m)
+      // this.trailColour = "rgb(0, 0, 0, "+ alpha +")";
+      var trailColVal = this.trailColVals[m];
+      this.trailColour = "rgb("+ Number(trailColVal[0]) +", "+ Number(trailColVal[1]) +", "+ Number(trailColVal[2]) +","+ alpha +")";
+    
+      
+      // console.log(this.trailColour)
+
+      if(i>0){
+      c.beginPath();
+      c.moveTo(x1, y1);
+      c.lineTo(x2, y2);
+
+      c.strokeStyle = this.trailColour;
+      c.lineWidth = 4;
+      c.stroke();
+      }
+    }
+
+
+    // Draw particle
     this.colour = "rgb("+ Number(colVals[0]) +", "+ Number(colVals[1]) +", "+ Number(colVals[2]) +")";
     
     if (sun && i==0){

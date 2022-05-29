@@ -111,7 +111,7 @@ var particles = [];
 const N = 400;
 // const IKM = 15; // How large the noise term is in left-right IKNM
 const radius = Math.sqrt((w*h)/(6*N)); // size of particles
-const dt = 0.1; // time step
+const dt = 0.05; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
 const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
