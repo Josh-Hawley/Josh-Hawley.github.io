@@ -158,14 +158,14 @@ function showLIRate() {
 }
 
 // Protrusion parameters
-var contactTimeMax = 50;
+var contactTimeMax = 100;
 contactTimeMax = Number(contactTimeSlider.value);
 function showContactTime() {
   contactTimeReadout.innerHTML = contactTimeSlider.value;
   contactTimeMax = Number(contactTimeSlider.value);
 }
 
-var probInteract = 0.0005;
+var probInteract = 0.01;
 probInteract = Number(probInteractSlider.value);
 function showProbInteract() {
   probInteractReadout.innerHTML = probInteractSlider.value;

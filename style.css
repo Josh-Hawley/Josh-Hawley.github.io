@@ -1,26 +1,16 @@
-body{
-  margin: 0;
-  padding: 0px;
-  display: grid;
-  /* place-items: center; */
-  min-height: 100vh;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
-  font-size:15px; 
-  width:innerWidth; 
-  margin-left:auto; 
-  margin-right:auto; 
-  background-color:rgb(3, 31, 36); 
-  color: rgb(231, 251, 255);
-}
+
+
 
 header {
   /* background-color: #e2e2e2; */
-  padding: 0px;
+  padding: 2px;
   max-height: 100px;
 }
 
 h1 {
   margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -40,17 +30,31 @@ h1 {
   display: inline-block;
   padding: 0.5em 0.75em;
   background-color: rgb(99, 94, 92);
-  border-radius: 4px;
+  border-radius: 14px;
+  text-decoration: none;
 }
+
+.nav .current{
+  background-color: rgb(215, 81, 66);
+}
+
+.nav a:hover{
+  color: rgb(30, 30, 30);
+  background-color: rgb(255, 129, 114);
+}
+
+
 /* Styling two point slider */
 .container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 550px;
   height: 50px;
-  background: rgb(3, 31, 36);
+  background: rgb(22, 30, 35);
   border-radius: 20px;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -74,7 +78,7 @@ h1 {
 
 .container .range-slider{
   position: relative;
-  width: 200px;
+  width: 150px;
   height: 7px;
   background: #EFEFEF;
   /* border: 1px solid #B2B2B2; */
@@ -119,7 +123,7 @@ h1 {
 
 .container .range-slider2{
   position: relative;
-  width: 200px;
+  width: 150px;
   height: 7px;
   background: #EFEFEF;
   /* border: 1px solid #B2B2B2; */
@@ -190,6 +194,9 @@ h1 {
 
 .standardSlider{
   text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
   padding: 10px;
 }
 

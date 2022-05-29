@@ -8,13 +8,43 @@
 
   <link rel="stylesheet" href="style.css">
 
+  <style>
+    body{
+      margin: 0;
+      padding: 0px;
+      display: block;
+      /* place-items: center; */
+      min-height: 100vh;
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+      font-size:15px; 
+      width:innerWidth; 
+      margin-left:auto; 
+      margin-right:auto; 
+      /* background-color:rgb(3, 31, 36);  */
+      background-color:rgb(243, 242, 225); 
+      color: rgb(40, 40, 40);
+    }
+
+    canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    /* border:3px solid #000000; */
+    border-radius: 40px;
+    background-color: rgb(206, 204, 192);;
+    /* width: 800px; */
+}
+  </style>
 </head>
 
 <header>
-  <h1>Josh Hawley</h1>
+  <h1><i>n</i>-body simulations</h1>
   <nav>
     <ul class="nav">
-      <li> <a href="index.html">Home</a> </li>
+      <li> <a href="index.html" class="current">Home</a> </li>
       <li> <a href="NeuralTube.html">Neural tube simulation</a> </li>
       <li> <a href="SpringyParticles.html">Springy particles simulation</a> </li>
     </ul>
@@ -23,10 +53,15 @@
 
 <body>
 
-<div>
-<p>Example text</p>
+<div style="margin-top: 60px;">
+  <h2 style= "text-align: center;">The many body problem</h2>
+<p style= "text-align: center;">Example text</p>
 </div>
 
+
+<canvas id="theCanvas"></canvas>
+<script src="nBodyCanvas.js"></script>
+<script src="js-colormaps.js"></script>
 
 
 </body>
