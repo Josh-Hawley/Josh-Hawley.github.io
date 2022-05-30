@@ -230,6 +230,7 @@ p {
 
 .sliderWrapper{
   display: flex;
+  justify-content: center;
 }
 
 .settingsBox{
@@ -244,6 +245,7 @@ p {
 
 .wrapper{
   display: flex;
+  justify-content: center;
 }
 
 .box1{
