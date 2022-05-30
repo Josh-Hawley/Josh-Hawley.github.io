@@ -40,104 +40,101 @@
 
 <body>
 
-  <div class="rows">
+  <!-- <div class="rows">
     
-    <div class="columns" style="padding-top: 25px;">
+    <div class="columns" style="padding-top: 25px;"> -->
+<div class="wrapper" >
 
-      <h1 style="font-size:24px;
-  text-align:center;">Simulation settings</h1>
+  <div class="box1">
+    <h1 style="font-size:24px; text-align:center;">Simulation settings</h1>
+    <p style="text-align: center;">Try clicking and dragging on the cells or messing around with the sliders below!</p>
+    
+    <div class="settingsBox">
 
-      <p style="text-align: center;">Try clicking and dragging on the cells or messing around with the sliders below!</p>
-      <div style="border: 2px solid #ddd; border-radius: 10px;">
-
-        <div class="standardSlider">
-            <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-            Interkinetic movement = <span id="IKMReadout">10</span>
-            <input type="range" id="IKMSlider" min="0" max="50" step="1" value="10" oninput="showIKM();" onchange="showIKM();" >
-        </div>
-        
-        <div class="standardSlider">
+      <div class="standardSliderNeural">
           <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-          Rate of lateral inhibition reaction = <span id="LIRateReadout">10</span>
-          <input type="range" id="LIRateSlider" min="1" max="40" step="1" value="10" oninput="showLIRate();" onchange="showLIRate();" style="background-color: blueviolet;" >
-        </div>
+          Interkinetic movement = <span id="IKMReadout">10</span>
+          <input type="range" id="IKMSlider" min="0" max="50" step="1" value="10" oninput="showIKM();" onchange="showIKM();" >
+      </div>
+      
+      <div class="standardSliderNeural">
+        <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
+        Rate of lateral inhibition reaction = <span id="LIRateReadout">10</span>
+        <input type="range" id="LIRateSlider" min="1" max="40" step="1" value="10" oninput="showLIRate();" onchange="showLIRate();" style="background-color: blueviolet;" >
+      </div>
 
-        <div class="standardSlider">
-          <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-          Protein degredation rate = <span id="muReadout">0.1</span>
-          <input type="range" id="muSlider" min="0.01" max="0.5" step="0.01" value="0.1" oninput="showMu();" onchange="showMu();" >
-        </div>
+      <div class="standardSliderNeural">
+        <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
+        Protein degredation rate = <span id="muReadout">0.5</span>
+        <input type="range" id="muSlider" min="0.01" max="0.5" step="0.01" value="0.1" oninput="showMu();" onchange="showMu();" >
+      </div>
 
-        <div class="standardSlider">
-          Protrusion lifetime = <span id="contactTimeReadout">50</span>
-          <input type="range" id="contactTimeSlider" min="1" max="100" step="1" value="100" oninput="showContactTime();" onchange="showContactTime();" >
-        </div>
+      <div class="standardSliderNeural">
+        Protrusion lifetime = <span id="contactTimeReadout">100</span>
+        <input type="range" id="contactTimeSlider" min="1" max="100" step="1" value="100" oninput="showContactTime();" onchange="showContactTime();" >
+      </div>
 
-        <div class="standardSlider">
-          Probability of forming new protrusion = <span id="probInteractReadout">0.0005</span>
-          <input type="range" id="probInteractSlider" min="0.0001" max="0.01" step="0.0001" value="0.01" oninput="showProbInteract();" onchange="showProbInteract();" >
-        </div>
+      <div class="standardSliderNeural">
+        Probability of forming new protrusion = <span id="probInteractReadout">0.0005</span>
+        <input type="range" id="probInteractSlider" min="0.0001" max="0.01" step="0.0001" value="0.01" oninput="showProbInteract();" onchange="showProbInteract();" >
+      </div>
 
-        <!-- Range slider for radius of interaction -->
-        <div class="container">
-          <p style="text-align: left; margin: 10px;">Min signalling <br>distance between <br>cells</p> 
-          <div class = "min-value numberVal">
-            <input type="number" min="0" max="10" value="4" step="0.1" disabled>
-          </div>
-          &nbsp; 
-          <div class = "range-slider">
-            <div class="progress"></div>
-            <input type="range" class="range-min" id="minSliderVal" min="0" max="10" value="4" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
-            <input type="range" class="range-max" id="maxSliderVal" min="0" max="10" value="6" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
-          </div>
-          &nbsp;
-          <div class="max-value numberVal">
-            <input type="number" min="0" max="10" value="6" step="0.1" disabled>
-          </div>
+      <!-- Range slider for radius of interaction -->
+      <div class="container">
+        <p style="text-align: left; margin: 10px;">Min signalling <br>distance between <br>cells</p> 
+        <div class = "min-value numberVal">
+          <input type="number" min="0" max="10" value="1" step="0.1" disabled>
+        </div>
+        &nbsp; 
+        <div class = "range-slider">
+          <div class="progress"></div>
+          <input type="range" class="range-min" id="minSliderVal" min="0" max="10" value="1.8" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
+          <input type="range" class="range-max" id="maxSliderVal" min="0" max="10" value="3" step="0.1" oninput="updateMinMax();" onchange="updateMinMax();">
+        </div>
+        &nbsp;
+        <div class="max-value numberVal">
+          <input type="number" min="0" max="10" value="3" step="0.1" disabled>
+        </div>
         <p style="text-align: right; margin: 10px;">Max signalling <br>distance between <br>cells</p>  
-        </div>
+      </div>
 
-        <!-- Range slider for angle of interaction -->
-        <div class="container">
-          <p style="text-align: left; margin: 10px;">Start angle of<br>cell interaction <br>(degrees)</p> 
-          <div class = "min-value numberVal2">
-            <input type="number" min="0" max="180" value="45" step="1" disabled>
-          </div>
-          &nbsp; 
-          <div class = "range-slider2">
-            <div class="progress"></div>
-            <input type="range" class="range-min2" id="minAngleSliderVal" min="0" max="180" value="45" step="1" oninput="updateMinMaxAngle();" onchange="updateMinMaxAngle();">
-            <input type="range" class="range-max2" id="maxAngleSliderVal" min="0" max="180" value="135" step="1" oninput="updateMinMaxAngle();" onchange="updateMinMaxAngle();">
-          </div>
-          &nbsp;
-          <div class="max-value numberVal2">
-            <input type="number" min="0" max="180" value="135" step="1" disabled>
-          </div>
+      <!-- Range slider for angle of interaction -->
+      <div class="container">
+        <p style="text-align: left; margin: 10px;">Start angle of<br>cell interaction <br>(degrees)</p> 
+        <div class = "min-value numberVal2">
+          <input type="number" min="0" max="180" value="0" step="1" disabled>
+        </div>
+        &nbsp; 
+        <div class = "range-slider2">
+          <div class="progress"></div>
+          <input type="range" class="range-min2" id="minAngleSliderVal" min="0" max="180" value="0" step="1" oninput="updateMinMaxAngle();" onchange="updateMinMaxAngle();">
+          <input type="range" class="range-max2" id="maxAngleSliderVal" min="0" max="180" value="180" step="1" oninput="updateMinMaxAngle();" onchange="updateMinMaxAngle();">
+        </div>
+        &nbsp;
+        <div class="max-value numberVal2">
+          <input type="number" min="0" max="180" value="180" step="1" disabled>
+        </div>
         <p style="text-align: right; margin: 10px;">End angle of<br>cell interaction <br>(degrees)</p>  
-        </div>
-
       </div>
-      
-      
-      
-    </div>
 
-    <div class="columns">
-      <!-- <div style="width:500px; margin-left:auto; margin-right:auto; touch-action: none;"> -->
-      <div style="width:700px; touch-action: none;"></div>
-        <!-- <img src="NewtonDrawing.jpg" width="500" height="500" style="position:absolute;"> -->
-          <canvas id="theCanvas" width="700" height="700" style="position:relative;">
-            Canvas not supported; please update your browser.
-          </canvas>
-      </div>
     </div>
+  </div>
+  
 
+  <div class="box2">
+
+    <div class="box21">
+        <canvas id="theCanvas" width="650" height="650" class="canvasBoxNeural"></canvas>
+        
+        <script src="js-colormaps.js"></script>
+        <script src="NeuralTubeCanvas.js"></script>
+    </div>
   </div>
 
 
-  <!-- <p>This is a simulation of the neuroepithelia that makes up the tissue of the developing neural tube.</p> -->
-  <script src="js-colormaps.js"></script>
-  <script src="NeuralTubeCanvas.js"></script>
+
+</div>
+
 
 </body>
 </html>

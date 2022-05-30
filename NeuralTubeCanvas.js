@@ -134,15 +134,13 @@ function updateMinMax() {
 
 }
 
-thetaStart = Number(range2[0].value)*Math.PI/180;
-thetaEnd = Number(range2[1].value)*Math.PI/180;
+var thetaStart = Number(range2[0].value)*Math.PI/180;
+var thetaEnd = Number(range2[1].value)*Math.PI/180;
 function updateMinMaxAngle() {
   thetaStart = Number(minAngleSliderVal.value)*Math.PI/180;
   thetaEnd = Number(maxAngleSliderVal.value)*Math.PI/180;
 }
 
-// const LIDistMax = 3*radius;
-// const LIDistMin = 0*radius;
 
 var IKM = Number(IKMSlider.value);
 function showIKM() {
@@ -158,15 +156,13 @@ function showLIRate() {
 }
 
 // Protrusion parameters
-var contactTimeMax = 100;
-contactTimeMax = Number(contactTimeSlider.value);
+var contactTimeMax = Number(contactTimeSlider.value);
 function showContactTime() {
   contactTimeReadout.innerHTML = contactTimeSlider.value;
   contactTimeMax = Number(contactTimeSlider.value);
 }
 
-var probInteract = 0.01;
-probInteract = Number(probInteractSlider.value);
+var probInteract = Number(probInteractSlider.value);
 function showProbInteract() {
   probInteractReadout.innerHTML = probInteractSlider.value;
   probInteract = Number(probInteractSlider.value);

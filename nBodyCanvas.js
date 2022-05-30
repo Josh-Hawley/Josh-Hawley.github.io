@@ -61,6 +61,11 @@ function showG() {
   G = Number(sliderG.value);
 }
 
+var M = Number(sliderM.value); //Trail length
+function showM() {
+  readoutM.innerHTML = sliderM.value;
+  M = Number(sliderM.value);
+}
 
 
 // Parameters 
@@ -71,7 +76,7 @@ const sun = true;
 const sunMass = 300;
 
 // Trails parameters
-const M = 25; // Number of past positions to store
+// const M = 25; // Number of past positions to store
 
 
 
@@ -129,7 +134,6 @@ function showN() {
     currentN=N;
   }
 }
-
 
 
 
@@ -253,7 +257,9 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       this.trailColVals.push(colVals);
 
 
-    } else {
+    } 
+    
+    else {
       this.xTrail.shift()
       this.xTrail.push(this.x);
 
@@ -263,6 +269,14 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       this.trailColVals.shift();
       this.trailColVals.push(colVals);
       
+    }
+
+    if (this.xTrail.length > M){
+      for (let i = 0; i < this.xTrail.length-M; i++){
+        this.xTrail.shift();
+        this.yTrail.shift();
+        this.trailColVals.shift(colVals);
+      }
     }
 
 

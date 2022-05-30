@@ -104,8 +104,8 @@ p {
 }
 
 .container .range-slider .progress{
-  left: 40%;
-  right: 40%;
+  left: 18%;
+  right: 70%;
   height: 100%;
   background: #0075FF;
   border-radius: 50px;
@@ -149,8 +149,8 @@ p {
 }
 
 .container .range-slider2 .progress{
-  left: 40%;
-  right: 40%;
+  left: 0%;
+  right: 0%;
   height: 100%;
   background: #0075FF;
   border-radius: 50px;
@@ -161,7 +161,7 @@ p {
   position: absolute;
   top: -8px;
   left: -5px;
-  width: 101%;
+  width: 102%;
   -webkit-appearance: none;
   pointer-events: none;
   background: none;
@@ -177,7 +177,7 @@ p {
   border-radius: 50px;
 }
 
-/* Two column styling */
+/* Two column styling
 *{
   box-sizing: border-box;
 }
@@ -196,17 +196,17 @@ p {
   clear: both;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1500px){
   .columns{
     width: 100%;
   }
-}
+} */
 
 
 
 /* Standard sliders */
 
-.standardSlider{
+.standardSliderNeural{
   text-align: right;
   margin-left: auto;
   margin-right: auto;
@@ -226,6 +226,51 @@ p {
   justify-content: center;
   padding: 10px;
   
+}
+
+.sliderWrapper{
+  display: flex;
+}
+
+.settingsBox{
+  border: 2px solid #ddd; 
+  border-radius: 20px; 
+  width: 600px; 
+  /* justify-content: center; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.wrapper{
+  display: flex;
+}
+
+.box1{
+  flex: 1;
+  justify-content: left;
+}
+
+.box2{
+  flex: 1;
+}
+
+
+@media only screen and (max-width: 1500px){
+  .wrapper{
+    display: block;
+  }
+}
+
+
+.canvasBoxNeural{
+  position:absolute; 
+  margin-left: auto; 
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  display: block;
+  float: center;
 }
 
 

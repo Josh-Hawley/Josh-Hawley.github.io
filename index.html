@@ -67,17 +67,20 @@
 </div>
 
 
-<div style="margin-top: 0px;" class="mainText">
+<div style="margin-top: 0px;" class="sliderWrapper">
   <div class="standardSliderHome">
-    <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
     G = <span id="readoutG">600</span>
     <input type="range" id="sliderG" min="100" max="2000" step="1" value="600" oninput="showG();" onchange="showG();" >
   </div>
 
   <div class="standardSliderHome">
-    <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->
-    Number of planets = <span id="readoutN">2</span>
+     Number of planets = <span id="readoutN">2</span>
     <input type="range" id="sliderN" min="2" max="31" step="1" value="3" oninput="showN();" onchange="showN();" >
+  </div>
+
+  <div class="standardSliderHome">
+    Trail length = <span id="readoutM">2</span>
+    <input type="range" id="sliderM" min="0" max="2000" step="1" value="25" oninput="showM();" onchange="showM();" >
   </div>
 </div>
 
