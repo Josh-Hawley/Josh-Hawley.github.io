@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive CSS */
 
 
 
@@ -16,18 +22,46 @@ h1 {
 
 h2{
   text-align: center;
+  padding: 30px 30px 20px;
+  font-family: arial;
+  /* font-size: 50px; */
+  line-height: 25px;
 }
 
 p {
   text-align: center;
+  padding: 0px 30px 20px;
+  /* font-size: 16px; */
+  line-height: 24px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+      
 }
 
 .mainText{
   margin-top: 35px; 
-  width: 600px; 
+  width: 100%; 
   margin-left: auto; 
   margin-right: auto;
 }
+
+
+@media only screen and (min-width: 768px){
+
+  .mainText{
+    width: 800px;
+    margin: 0 auto;
+  }
+  
+
+}
+
+
+
+
+
+
+
+
 
 .nav {
   margin: 0;
@@ -250,11 +284,11 @@ p {
 
 .box1{
   flex: 1;
-  justify-content: left;
 }
 
 .box2{
   flex: 1;
+  margin: 0 auto;
 }
 
 

@@ -219,6 +219,9 @@ for (let i = 0; i < N; i++) {
 window.addEventListener("mousedown", findCell, false);
 window.addEventListener("touchstart", findCell, false);
 
+
+
+
 window.addEventListener("mouseup", e => {
   dragging = false;
 }, false);
