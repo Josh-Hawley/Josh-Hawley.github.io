@@ -20,8 +20,10 @@ if (window.innerWidth*widthScale > maxWidth){
 } else{
   canvas.width = window.innerWidth*widthScale;
 }
-// canvas.width = window.innerWidth*widthScale;
-canvas.height = window.innerHeight*heightScale;
+
+var currentWindowWidth = window.innerWidth;
+
+canvas.height = canvas.width;
 w = canvas.width;
 h = canvas.height;
 
@@ -173,16 +175,24 @@ function animate(){
 
   requestAnimationFrame(animate);
   c.clearRect(0, 0, w, h); // clear canvas
-  if (window.innerWidth*widthScale > maxWidth){
-    canvas.width = maxWidth;
-  } else{
-    canvas.width = window.innerWidth*widthScale;
+
+  if(currentWindowWidth != window.innerWidth){
+    console.log('rescale');
+    if (window.innerWidth*widthScale > maxWidth){
+      canvas.width = maxWidth;
+    } else{
+      canvas.width = window.innerWidth*widthScale;
+    }
+    particles[0].x = w/2;
+    particles[0].y = h/2;
+    currentWindowWidth = window.innerWidth;
   }
   
-  canvas.height = window.innerHeight*heightScale;
+  canvas.height = canvas.width;
   
   w = canvas.width;
   h = canvas.height;
+
   for(i = 0; i < N; i++){
     // particles.repel(particles, i);
     
@@ -243,9 +253,12 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
     // colVals = evaluate_cmap(aNorm, 'RdYlBu', true); // Colourmaps documentation at https://github.com/timothygebhard/js-colormaps
     // colVals = evaluate_cmap(aNorm, 'Spectral', true);
     // colVals = evaluate_cmap(aNorm, 'viridis', false);
-    colVals = evaluate_cmap(aNorm, 'cubehelix', false);
+    // colVals = evaluate_cmap(aNorm, 'cubehelix', false);
     // colVals = evaluate_cmap(aNorm, 'gist_stern', false);
-    // let colVals = evaluate_cmap(aNorm, 'rainbow', true);
+    // colVals = evaluate_cmap(aNorm, 'YlGnBu', true);
+    // colVals = evaluate_cmap(aNorm, 'RdPu', true);
+    // colVals = evaluate_cmap(aNorm, 'rainbow', true);
+    colVals = evaluate_cmap(aNorm, 'gist_earth', false);
     
 
         //Update trail

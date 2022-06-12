@@ -6,26 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Josh Hawley</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@700&family=Fira+Sans:wght@300;400&family=Poppins:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
-  <style>
-    body{
-      margin: 0;
-      padding: 0px;
-      display: block;
-      /* place-items: center; */
-      min-height: 100vh;
-      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
-      font-size:15px; 
-      width:innerWidth; 
-      margin-left:auto; 
-      margin-right:auto; 
-      /* background-color:rgb(3, 31, 36);  */
-      background-color:rgb(243, 242, 225); 
-      color: rgb(40, 40, 40);
-    }
 
-    canvas {
+  <style>
+
+  canvas {
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;
@@ -36,36 +25,43 @@
     float: none;
     /* border:3px solid #000000; */
     border-radius: 40px;
-    background-color: rgb(206, 204, 192);;
+    background-color: rgb(15, 22, 26);;
     /* width: 800px; */
-}
+  }
   </style>
 </head>
 
-<header>
-  <h1>A website of many simulations</h1>
+
+  
+
+
+
+<body>
   <nav>
-    <ul class="nav">
+    <div class="logo">
+      <h4> <a href="index.html">Josh Hawley</a></h4>
+    </div>
+    <ul class="nav-links">
       <li> <a href="index.html" class="current">Home</a> </li>
       <li> <a href="NeuralTube.html">Neural tube simulation</a> </li>
       <li> <a href="SpringyParticles.html">Springy particles simulation</a> </li>
     </ul>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
   </nav>
-</header>
-
-<body>
-
 
     <div class="mainText">
       <h2>What's on this website?</h2>
-      <p>This website contains all the interesting Javascript projects I have made/working on. 
-        At the moment this consists of variations of simulating many particles that have simple rules for interacting with each other, which results in interesting complex behaviour. 
-        There's a gravitaional example below, and if you click the tabs at the top, you'll find other simulations, and the nerual tube sim is based on my PhD work.</p>
+      <p>Hello! This website contains all the interesting Javascript projects I am working on. It's a little space where I'm making interactive simualtions, including one based around my <a style="text-decoration: underline;" href="NeuralTube.html">PhD work</a>. There are a couple of other simulations, a gravitational one below, and the others are found in the nav bar.</p>
     </div>
     <div class="mainText">
       <h2>"It's not a ghost, it's gravity." <span style="font-size:15px;"> <i>[1]</i></span></h2>
-    <p>The particles or planets below are programmed to follow Newton's law of universal gravitation <i>[2]</i>, meaning each particle attracts every other particle with a force dependent on the distance between them as well as the product of both their masses. </p>
-    <p>This simple interaction results in chaotic motion, not solvable without simulations like this! Play around with the sliders below, or drag the sun around (big yellow blob).</p>
+    <p>A fun little simulation of planets orbiting the sun (and each other). Pay around with the sliders to change strength of gravity 'G' and the number of planets. You can also drag the Sun around.
+      <!-- The forceThe particles or planets below are programmed to follow Newton's law of universal gravitation <i>[2]</i>, meaning each particle attracts every other particle with a force dependent on the distance between them as well as the product of both their masses. </p> -->
+    <!-- <p>This simple interaction results in chaotic motion, not solvable without simulations like this! Play around with the sliders below, or drag the sun around (big yellow blob).</p> -->
     </div>  
        
 
@@ -91,14 +87,14 @@
 <canvas id="theCanvas"></canvas>
 <script src="nBodyCanvas.js"></script>
 <script src="js-colormaps.js"></script>
+<script src="navAnimation.js"></script>
 
 <footer>
   <div style="margin-top: 60px; width: 50%; margin-left: auto; margin-right: auto;">
     <h2 style="text-align: left;">References</h2>
     <p style="text-align: left;">
-      <a style="color: rgb(52, 86, 210);" href="https://youtu.be/9yd6Voy8j24?t=211"><i>[1]</i> Interstellar (2014)</a> <br> 
-      <a style="color: rgb(52, 86, 210);" href="https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation"><i>[2]</i> Newton's law of universal gravitation</a> 
-      </p>
+      <a  href="https://youtu.be/9yd6Voy8j24?t=211"><i>[1]</i> Interstellar (2014)</a> <br> 
+            </p>
     </div>
 </footer>
 
