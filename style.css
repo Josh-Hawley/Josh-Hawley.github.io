@@ -137,9 +137,11 @@ a:hover {
 .burger{
   display: none;
 }
-
+body{
+  overflow-x: hidden;
+}
 @media screen and (max-width: 768px) {
-  .body-div{
+  body{
     overflow-x: hidden;
   }
 
