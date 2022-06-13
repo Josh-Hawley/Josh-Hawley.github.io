@@ -9,7 +9,7 @@
 // Add cell division cell cycle function
 // At wall send other way
 // Random IKM param per cell
-// Use D3.js to graph outputs
+// Use D3.js or Chart.js to graph outputs
 //Get a good colourmap
 // Mouse increases expression in a given area
 // Angle dependent protrusions
@@ -25,6 +25,21 @@ var c = theCanvas.getContext("2d");
 // var speedSlider = document.getElementById("speedSlider");
 // var speedReadout = document.getElementById("speedReadout");
 
+// w = canvas.width;
+// h = canvas.height;
+
+widthScale = 0.9;
+heightScale = 0.75;
+maxWidth = 650;
+if (window.innerWidth*widthScale > maxWidth){
+  canvas.width = maxWidth;
+} else{
+  canvas.width = window.innerWidth*widthScale;
+}
+
+var currentWindowWidth = window.innerWidth;
+
+canvas.height = canvas.width;
 w = canvas.width;
 h = canvas.height;
 
@@ -109,10 +124,9 @@ let dragging = false;
 var dragCellIdx = -1;
 var particles = [];
 const N = 200;
-// const IKM = 15; // How large the noise term is in left-right IKNM
+
 const radius = Math.sqrt((w*h)/(6*N)); // size of particles
 const dt = 0.05; // time step
-// const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
 const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
   x: 2,
@@ -121,9 +135,6 @@ const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped s
 
 const springDist = 2.8*radius;;
 const R = 20; // A=k/m for particle repulsion 
-
-// var thetaStart = 0;
-// var thetaEnd = Math.PI/2;
 
 
 LIDistMin = Number(range[0].value)*2*radius;
@@ -185,16 +196,6 @@ for (let i = 0; i < N; i++) {
   var x = Math.random() * w;
   var y = Math.random() * h;
 
-  // colPos += w/Ncol;
-
-  // if (colPos > w - springDist){
-  //   colPos = 0;
-  //   rowPos += h/Nrow;
-  // }
-
-  // x = springDist + colPos + 3*(Math.random()-0.5);
-  // y = springDist + rowPos + 3*(Math.random()-0.5);
-
   var vx = 0;
   var vy = 0;
 
@@ -206,21 +207,8 @@ for (let i = 0; i < N; i++) {
   particles.push(new Particle(x, y, x0, y0, vx, vy, B, radius, colour));
 }
 
-
-// window.addEventListener("click",
-//   function(event){
-//     for(i = 0; i < N; i++){
-//       particles[i].perturb();
-//     }
-//   }
-// )
-
-
 window.addEventListener("mousedown", findCell, false);
 window.addEventListener("touchstart", findCell, false);
-
-
-
 
 window.addEventListener("mouseup", e => {
   dragging = false;
@@ -256,35 +244,34 @@ function animate(){
 
   requestAnimationFrame(animate);
   c.clearRect(0, 0, w, h); // clear canvas
-  // c.fillStyle = "rgb(150, 150, 150)";
-  // c.fillRect(0, 0, w, h); // fill canvas with background colour
+
+
+  if(currentWindowWidth != window.innerWidth){
+    console.log('rescale');
+    if (window.innerWidth*widthScale > maxWidth){
+      canvas.width = maxWidth;
+    } else{
+      canvas.width = window.innerWidth*widthScale;
+    }
+    particles[0].x = w/2;
+    particles[0].y = h/2;
+    currentWindowWidth = window.innerWidth;
+  }
+  
+  canvas.height = canvas.width;
+  
+  w = canvas.width;
+  h = canvas.height;
+
 
   for(i = 0; i < N; i++){
-    // particles.repel(particles, i);
     
     particles[i].update(particles, i);
     particles[i].lateralInhibition(particles,i);
     particles[i].draw("proteinGrey",i);
 
-    // canvas.addEventListener("mousedown", function(downEvent){
-    //   banana = downEvent.layerX
-    //   // particles[i].moveParticle();
-      
-    // })
-    // canvas.addEventListener("mousedown", particles[i].moveParticle());
   }
-
 }
-
-// var mouse = {
-//   x: undefined,
-//   y: undefined
-// }
-
-// window.addEventListener("mousemove", function(event){
-//   mouse.x = event.x
-//   mouse.y = event.y
-// })
 
 function Particle (x, y, x0, y0, vx, vy, B, radius){
   this.x = x;           // x-position of cell
@@ -305,59 +292,33 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
     this.contactTime.push(0);
   }
 
-  // canvas.addEventListener("mousedown", this.moveParticle());
   
 
   this.draw = function(colourType,i) {
 
-    // if(colourType == "acceleration"){
-    //   aMag = Math.sqrt(this.ax*this.ax + this.ay*this.ay);
-    //   // aMag = Math.sqrt((this.x0 - this.x)*(this.x0 - this.x));
-    //   aMax = 60;
-    //   rVal = 255*aMag/aMax;
-    //   bVal = 50* (aMag*aMag)/(aMax*aMax) + 100;
-    //   gVal = 50* (aMag*aMag)/(aMax*aMax) + 100;
-    //   // bVal = 50* aMag/aMax + 100;
-    //   // gVal = 50* aMag/aMax + 100;
-    //   this.colour = "rgb("+ rVal +", "+ bVal +", "+ gVal +")";
-    // }
     
-    // if(colourType == "indexGrey"){
-    //   colVal = 255*i/N;
-    //   this.colour = "rgb("+ colVal +", "+ colVal +","+ colVal +")";
-
-    // }
-
-    // if(colourType == "proteinBRW"){
-    //   pMax = 6;
-    //   rVal = 255*this.p/pMax;
-    //   bVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
-    //   gVal = 50* (this.p*this.p)/(pMax*pMax) + 100;
-    //   // bVal = 50* aMag/aMax + 100;
-    //   // gVal = 50* aMag/aMax + 100;
-    //   this.colour = "rgb("+ rVal +", "+ bVal +", "+ gVal +")";
-    // }
-
-    // if(colourType == "proteinGrey"){
-    //   pMax = 3;
-    //   colVal = 205*this.p/pMax +40;
-      
-    //   // bVal = 50* aMag/aMax + 100;
-    //   // gVal = 50* aMag/aMax + 100;
-    //   this.colour = "rgb("+ colVal +", "+ colVal +", "+ colVal +")";
-    // }
 
     pMax = 10;
     normP = this.p/pMax;
     if (this.p > pMax){
       normP = 1;
     } 
+
+    let minCol = 0.08;
+    if (normP < minCol){
+      normP = minCol;
+    }
     // console.log(normP);
-    colVals = evaluate_cmap(normP, 'RdYlBu', true); // Colourmaps documentation at https://github.com/timothygebhard/js-colormaps
+    colVals = evaluate_cmap(normP, 'RdYlBu', true); 
     // colVals = evaluate_cmap(normP, 'Spectral', true);
     // colVals = evaluate_cmap(normP, 'viridis', false);
     // colVals = evaluate_cmap(normP, 'cubehelix', false);
     // colVals = evaluate_cmap(normP, 'gist_stern', false);
+    colVals = evaluate_cmap(normP, 'YlOrRd', true);
+    colVals = evaluate_cmap(normP, 'RdPu', true);
+    colVals = evaluate_cmap(normP, 'gnuplot', false);
+    // colVals = evaluate_cmap(normP, 'magma', false);
+    // colVals = evaluate_cmap(normP, 'plasma', false);
     
     this.colour = "rgb("+ Number(colVals[0]) +", "+ Number(colVals[1]) +", "+ Number(colVals[2]) +")";
     

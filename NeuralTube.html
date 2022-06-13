@@ -35,7 +35,7 @@
   <!-- <div class="rows">
     
     <div class="columns" style="padding-top: 25px;"> -->
-<div class="wrapper" >
+<div class="wrapperNeural" >
 
   <div class="box1">
     <h1 style="font-size:24px; text-align:center;">Simulation settings</h1>
@@ -72,8 +72,11 @@
       </div>
 
       <!-- Range slider for radius of interaction -->
+      <div>
+        <p style="margin-top: 30px;">Min and max interaction distance (cell diameters)</p>
+      </div>
       <div class="container">
-        <p style="text-align: left; margin: 10px;">Min signalling <br>distance between <br>cells</p> 
+        <!-- <p style="text-align: left; margin: 10px;">Min signalling <br>distance between <br>cells</p>  -->
         <div class = "min-value numberVal">
           <input type="number" min="0" max="10" value="1" step="0.1" disabled>
         </div>
@@ -87,12 +90,15 @@
         <div class="max-value numberVal">
           <input type="number" min="0" max="10" value="3" step="0.1" disabled>
         </div>
-        <p style="text-align: right; margin: 10px;">Max signalling <br>distance between <br>cells</p>  
+        <!-- <p style="text-align: right; margin: 10px;">Max signalling <br>distance between <br>cells</p>   -->
       </div>
 
       <!-- Range slider for angle of interaction -->
+      <div>
+        <p style="margin-top: 30px;">Start and end angle for interactions</p>
+      </div>
       <div class="container">
-        <p style="text-align: left; margin: 10px;">Start angle of<br>cell interaction <br>(degrees)</p> 
+        <!-- <p style="text-align: left; margin: 10px;">Start angle of<br>cell interaction <br>(degrees)</p>  -->
         <div class = "min-value numberVal2">
           <input type="number" min="0" max="180" value="0" step="1" disabled>
         </div>
@@ -106,23 +112,22 @@
         <div class="max-value numberVal2">
           <input type="number" min="0" max="180" value="180" step="1" disabled>
         </div>
-        <p style="text-align: right; margin: 10px;">End angle of<br>cell interaction <br>(degrees)</p>  
+        <!-- <p style="text-align: right; margin: 10px;">End angle of<br>cell interaction <br>(degrees)</p>   -->
       </div>
 
     </div>
   </div>
   
 
-  <div class="box2">
 
-    <div class="box21">
-        <canvas id="theCanvas" width="650" height="650" class="canvasBoxNeural"></canvas>
-        
-        <script src="js-colormaps.js"></script>
-        <script src="NeuralTubeCanvas.js"></script>
-        <script src="navAnimation.js"></script>
-    </div>
-  </div>
+
+    
+  <canvas id="theCanvas"  class="canvasBoxNeural"></canvas>
+  
+  <script src="js-colormaps.js"></script>
+  <script src="NeuralTubeCanvas.js"></script>
+  <script src="navAnimation.js"></script>
+ 
 
 
 

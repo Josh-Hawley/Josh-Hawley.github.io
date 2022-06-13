@@ -8,7 +8,7 @@
 body{
   margin: 0;
   padding: 0px;
-  display: grid;
+  /* display: grid; */
   /* place-items: center; */
   min-height: 100vh;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
@@ -19,6 +19,8 @@ body{
   background-color:rgb(22, 30, 35); 
   color: rgb(226,226,226);
 }
+
+
 
 /* Responsive CSS */
 
@@ -40,8 +42,6 @@ h1 {
 h2{
   text-align: center;
   padding: 30px 30px 20px;
-  font-family: arial;
-  /* font-size: 50px; */
   line-height: 25px;
 }
 
@@ -124,6 +124,7 @@ a {
 }
 a:hover {
   color: rgb(255, 221, 120);
+  /* transition: all 0.02s ease; */
 }
 
 .burger div{
@@ -137,11 +138,39 @@ a:hover {
 .burger{
   display: none;
 }
-body{
-  overflow-x: hidden;
+
+.burger:hover div{
+
+    background-color: rgb(255, 221, 120);;
+ 
+  
 }
+
+
+
+
 @media screen and (max-width: 768px) {
+
+  html {
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  body {
+    margin: 0;
+    width: 100vw; 
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   body{
+    overflow-x: hidden;
+  }
+  
+  .bodyDiv{
     overflow-x: hidden;
   }
 
@@ -158,6 +187,7 @@ body{
     width: 50%;
     transform: translateX(100%);
     transition: transform 0.2s ease-in;
+    overflow-x: hidden;
   }
   /* .nav-links a{
     color: rgb(38, 38, 38);
@@ -179,32 +209,35 @@ body{
     cursor: pointer;
   }
 
-}
 
-.nav-active{
-  transform: translateX(0%);
-}
-
-@keyframes navLinkFade{
-  from{
+  .nav-active{
+    transform: translateX(0%);
+  }
+  
+  @keyframes navLinkFade{
+    from{
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to{
+      opacity: 1;
+      transform: translateX(0px); 
+    }
+  }
+  
+  .toggle .line1{
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  .toggle .line2{
     opacity: 0;
-    transform: translateX(50px);
   }
-  to{
-    opacity: 1;
-    transform: translateX(0px); 
+  .toggle .line3{
+    transform: rotate(45deg) translate(-5px, -6px);
   }
+
 }
 
-.toggle .line1{
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-.toggle .line2{
-  opacity: 0;
-}
-.toggle .line3{
-  transform: rotate(45deg) translate(-5px, -6px);
-}
+
 
 
 
@@ -217,13 +250,13 @@ body{
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 15px;
   width: 600px;
-  height: 50px;
-  background: rgb(22, 30, 35);
+  height: 30px;
+  /* background: rgb(22, 30, 35); */
+  /* background: rgb(118, 142, 157); */
   border-radius: 0px;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .container input[type="number"]{
@@ -265,9 +298,9 @@ body{
 
 .container .range-slider input[type="range"]{
   position: absolute;
-  top: -8px;
+  top: -6px;
   left: -5px;
-  width: 101%;
+  width: 106%;
   -webkit-appearance: none;
   pointer-events: none;
   background: none;
@@ -310,9 +343,9 @@ body{
 
 .container .range-slider2 input[type="range"]{
   position: absolute;
-  top: -8px;
+  top: -6px;
   left: -5px;
-  width: 102%;
+  width: 106%;
   -webkit-appearance: none;
   pointer-events: none;
   background: none;
@@ -366,31 +399,47 @@ body{
 .settingsBox{
   border: 2px solid #ddd; 
   border-radius: 20px; 
-  width: 650px; 
+  width: 600px; 
   /* justify-content: center; */
   margin-left: auto;
   margin-right: auto;
 }
 
+@media screen and (max-width: 768px) {
+  .settingsBox{
+    border: 2px solid #ddd; 
+    border-radius: 20px; 
+    width: 90%; 
+    /* justify-content: center; */
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.wrapper{
+  .container {
+
+    width: 80%;
+   
+  }
+}
+
+.wrapperNeural{
   display: flex;
   justify-content: center;
-}
+  margin-top: 50px;
+  
 
-.box1{
-  flex: 1;
-}
-
-.box2{
-  flex: 1;
-  margin: 0 auto;
 }
 
 
-@media only screen and (max-width: 1500px){
-  .wrapper{
+@media only screen and (max-width: 1300px){
+  .wrapperNeural{
     display: block;
+    text-align: center;
+  }
+  .canvasBoxNeural{
+    margin-left: auto; 
+    margin-right: auto;
+    padding-right: 0px;
   }
 }
 @media only screen and (max-width: 700px){
@@ -402,18 +451,26 @@ body{
     margin-right: auto;
     flex-direction: column;
   }
+  .canvasBoxNeural{
+    margin-left: auto; 
+    margin-right: auto;
+  }
 }
 
 
-.canvasBoxNeural{
-  position:absolute; 
+.box1{
+  position:relative; 
   margin-left: auto; 
-  margin-right: auto;
-  padding-left: 0;
-  padding-right: 0;
-  display: block;
-  float: center;
+  
+  justify-content: flex-end;
 }
+.canvasBoxNeural{
+  position:relative; 
+  margin-right: auto; 
+  
+}
+
+
 
 
 
