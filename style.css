@@ -139,7 +139,7 @@ a:hover {
 }
 
 @media screen and (max-width: 768px) {
-  body{
+  .body-div{
     overflow-x: hidden;
   }
 
