@@ -56,7 +56,7 @@ canvas.addEventListener("touchmove", function(event){
 let dragging = false;
 var dragCellIdx = -1;
 var particles = [];
-const N = 1500;
+const N = 800;
 // const IKM = 15; // How large the noise term is in left-right IKNM
 // const radius = 10; // size of particles
 const radius = Math.sqrt((w*h)/(6*N)); //Formula for filling the canvas size with the perfect number of particles
