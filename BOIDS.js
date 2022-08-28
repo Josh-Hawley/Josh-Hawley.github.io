@@ -44,8 +44,6 @@ canvas.addEventListener("touchmove", function(event){
 })
 
 
-
-
 let dragging = false;
 var dragCellIdx = -1;
 var particles = [];
@@ -55,6 +53,9 @@ var N = Number(sliderN.value);
 var currentN = N;
 const dt = 0.3; // time step
 const radiusScale = 0.1;
+
+const maxSpeed = 6;
+const cohesionCoeff = 0.1; 
 
 
 var G = Number(sliderG.value);
@@ -73,8 +74,8 @@ function showM() {
 // Parameters 
 // const G = 1000;
 const minMass = 30;
-const maxMass = 100;
-const sun = true;
+const maxMass = 30;
+const sun = false;
 const sunMass = 300;
 
 // Trails parameters
@@ -257,10 +258,9 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
     // colVals = evaluate_cmap(aNorm, 'gist_stern', false);
     // colVals = evaluate_cmap(aNorm, 'YlGnBu', true);
     // colVals = evaluate_cmap(aNorm, 'RdPu', true);
-    // colVals = evaluate_cmap(aNorm, 'RdPu', true);
+    // colVals = evaluate_cmap(aNorm, 'rainbow', true);
+    colVals = evaluate_cmap(aNorm, 'gist_earth', false);
 
-    colVals = evaluate_cmap(aNorm, 'Blues', true);
-    // colVals = evaluate_cmap(aNorm, 'gist_earth', false);
     
 
         //Update trail
@@ -308,6 +308,9 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       // this.trailColour = "rgb(0, 0, 0, "+ alpha +")";
       var trailColVal = this.trailColVals[m];
       this.trailColour = "rgb("+ Number(trailColVal[0]) +", "+ Number(trailColVal[1]) +", "+ Number(trailColVal[2]) +","+ alpha +")";
+
+      this.trailColour = "rgb("+ 255 +", "+ 255 +", "+ 255 +","+ alpha +")";
+      // this.trailColour= "rgb(255, 255, 255"+ alpha +")";
     
       
       // console.log(this.trailColour)
@@ -326,6 +329,7 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
 
     // Draw particle
     this.colour = "rgb("+ Number(colVals[0]) +", "+ Number(colVals[1]) +", "+ Number(colVals[2]) +")";
+    this.colour = "rgb("+ 255 +", "+ 255 +", "+ 255 +")";
     
     if (sun && i==0){
       this.colour = "rgb(255, 220, 100)";
@@ -340,7 +344,13 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
     c.fill();
   }
 
-  this.update = function(particles, i) {
+
+
+
+
+
+
+  this.update = function(particles, i) { // This sums up all the different calculated accelerations to update the velocity and position
 
     if (i == 0){
       for (let n = 0; n < N; n++){
@@ -359,16 +369,19 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       this.vy = 0;
     } 
 
-    this.attract(particles, i);
-    // this.boundaries();
+    // this.attract(particles, i);
+    this.boundaries();
+
+    // let alignment = this.align(particles, i);
+    let cohesion = this.cohesion(particles, i);
+    // let separation = 
+
+    
+    this.ax = cohesion[0];
+    this.ay = cohesion[1];
 
     this.vx += this.ax*dt;
     this.vy += this.ay*dt;
-
-    if (sun && i==0){
-      this.vx = 0;
-      this.vy = 0;
-    }
 
     this.x  += this.vx*dt;
     this.y  += this.vy*dt;
@@ -378,8 +391,13 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
 
 
 
-  this.attract = function(particles, i) {
-    for (let j = i+1; j < N; j++){
+  this.cohesion = function(particles, i){
+    let perceptionRadius = 50;
+    let steeringX = 0;
+    let steeringY = 0;
+    let total = 0;
+
+    for (let j = 0; j < N; j++){
 
       let other = particles[j];
 
@@ -388,22 +406,69 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       let dy = other.y - this.y;
       let r = Math.sqrt(dx*dx + dy*dy);
 
-      let F = G*this.m*other.m/(r*r);
-
-      // Prevent infinite acceleration if particles cross paths
-      let minDist = this.m+other.m;
-      let maxF = G*this.m*other.m/(minDist*minDist);
-      if (F > maxF) {
-        F=maxF;
+      if (other != this && r < perceptionRadius){
+        
+        steeringX += other.x;
+        console.log(steeringX)
+        steeringY += other.y;
+        total++;
       }
 
-      this.ax  += F*dx/(r*this.m);
-      this.ay  += F*dy/(r*this.m);
-      other.ax -= F*dx/(r*other.m);
-      other.ay -= F*dy/(r*other.m);
+      if (total > 0){
+        steeringX = steeringX/total; //average position attracted to
+        steeringX = (steeringX - this.x)*cohesionCoeff; // difference between attracted position and current position
+        if (streeringX > maxSpeed){
+          steeringX == maxSpeed;
+        }
+        if (streeringY > maxSpeed){
+          steeringY == maxSpeed;
+        }
+         
 
       }
+      // console.log(total)
+      return [steeringX, steeringY];
+      
     }
+
+
+  }
+
+  // this.attract = function(particles, i) {
+  //   for (let j = i+1; j < N; j++){
+
+  //     let other = particles[j];
+
+  //     let dx = other.x - this.x;
+     
+  //     let dy = other.y - this.y;
+  //     let r = Math.sqrt(dx*dx + dy*dy);
+
+  //     let F = G*this.m*other.m/(r*r);
+
+  //     // Prevent infinite acceleration if particles cross paths
+  //     let minDist = this.m+other.m;
+  //     let maxF = G*this.m*other.m/(minDist*minDist);
+  //     if (F > maxF) {
+  //       F=maxF;
+  //     }
+
+  //     this.ax  += F*dx/(r*this.m);
+  //     this.ay  += F*dy/(r*this.m);
+  //     other.ax -= F*dx/(r*other.m);
+  //     other.ay -= F*dy/(r*other.m);
+
+  //     }
+  //   }
+
+
+
+
+
+
+
+
+
 
     this.boundaries = function() {
       if(this.x > w){

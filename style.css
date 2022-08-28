@@ -1,3 +1,5 @@
+
+
 *{
   margin: 0;
   padding: 0;
@@ -13,8 +15,9 @@ body{
   min-height: 100vh;
   /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  */
   /* font-family: SF pro; */
-  font-family: inter;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+  /* font-family: inter; */
+  font-family: Nunito;
+  /* src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff"); */
 
   font-size:15px; 
   width:innerWidth; 
@@ -41,13 +44,14 @@ h1 {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  font-family: Josefin sans;
 }
 
 h2{
   text-align: center;
   padding: 30px 30px 20px;
   line-height: 25px;
-  font-size: 40;
+  font-family: Josefin sans;
 }
 
 p {
@@ -57,7 +61,8 @@ p {
   line-height: 24px;
   /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  */
   /* font-family: fira sans;  */
-  font-family: inter;
+  /* font-family: inter; */
+  /* font-family: Nunito; */
 }
 
 .mainText{
@@ -89,7 +94,7 @@ nav {
    /* font-family: 'Advent Pro', sans-serif; */
   /* font-family: 'Fira Sans', sans-serif;  */
   /* font-family: 'Poppins', sans-serif; */
-  font-family: inter;
+  font-family: josefin sans;
   font-weight: 500;
 }
 
@@ -103,7 +108,8 @@ nav {
 a {
   text-decoration: none;
   color: rgb(85, 108, 126);
-  font-family: inter;
+  /* font-family: inter; */
+  /* font-family: Nunito; */
 }
 
 .nav-links{
