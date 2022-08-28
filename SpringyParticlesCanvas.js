@@ -59,13 +59,14 @@ var particles = [];
 const N = 800;
 // const IKM = 15; // How large the noise term is in left-right IKNM
 // const radius = 10; // size of particles
-const radius = Math.sqrt((w*h)/(6*N)); //Formula for filling the canvas size with the perfect number of particles
+const radius = 0.85*Math.sqrt((w*h)/(6*N)); //Formula for filling the canvas size with the perfect number of particles
+// const radius = 10;
 const dt = 0.1; // time step
 // const B = 5; // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
 
 const B = { // B = b/sqrt(mk) - damping constant in non-dimensionalised damped spring equation
-  x: 2,
-  y: 2
+  x: 0.2,
+  y: 0.2
 }
 
 const springDist = 2.8*radius;;
@@ -282,6 +283,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
     // colVals = evaluate_cmap(aNorm, 'viridis', false);
     // colVals = evaluate_cmap(aNorm, 'cubehelix', false);
     colVals = evaluate_cmap(aNorm, 'gist_stern', false);
+    colVals = evaluate_cmap(aNorm, 'gnuplot', false);
     
     this.colour = "rgb("+ Number(colVals[0]) +", "+ Number(colVals[1]) +", "+ Number(colVals[2]) +")";
     
@@ -316,8 +318,10 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
       
       // if mouse is down identify which was the particle that was under the mouse click and keep updating it
     } 
-      this.ax += -this.B.x*this.vx - (this.x - this.x0);
-      this.ay += -this.B.y*this.vy - (this.y - this.y0);
+      // this.ax += -this.B.x*this.vx - (this.x - this.x0);
+      // this.ay += -this.B.y*this.vy - (this.y - this.y0);
+      this.ax += -this.B.x*this.vx ;
+      this.ay += -this.B.y*this.vy;
     
 
     // this.ax = -this.B.x*this.vx;
