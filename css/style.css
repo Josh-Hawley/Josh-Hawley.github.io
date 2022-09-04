@@ -578,7 +578,17 @@ text-align: center;
 
 }
 
+.portfolio-thumb{
+  width: 90%; 
+  margin-left: auto; 
+  margin-right: auto;
+}
 
+@media (min-width: 500px) {
+  .portfolio-thumb{
+    width: 500px; 
+  }
+}
 
 
 
