@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Josh Hawley</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@700&family=Fira+Sans:wght@300;400&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Josefin+Sans:wght@300;400;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+
+
+  <style>
+
+  canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    justify-content: center;
+    float: none;
+     border-radius: 40px;
+    background-color: rgb(15, 22, 26);
+
+ }
+  </style>
+</head>
+
+
+  
+
+
+
+<body>
+
+  <div class="bodyDiv">
+  
+  <nav>
+    <div class="logo">
+      <h4> <a href="../index.html">Josh Hawley</a></h4>
+    </div>
+    <ul class="nav-links">
+      <li> <a href="../index.html">Home</a> </li>
+      <li> <a href="About.html">About me</a> </li>
+      <li> <a href="portfolio.html">Portfolio</a> </li>
+    </ul>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+
+     
+       
+<canvas style id="theCanvas"></canvas>
+
+<div style="margin-top: 0px;" class="sliderWrapper">
+ 
+  <div class="standardSliderHome">
+     N = <span id="readoutN">150</span>
+    <input type="range" id="sliderN" min="2" max="2000" step="1" value="150" oninput="showN();" onchange="showN();" >
+  </div>
+
+  <div class="standardSliderHome">
+    Align = <span id="readoutAlign">0.01</span>
+    <input type="range" id="sliderAlign" min="0" max="0.5" step="0.01" value="0.01" oninput="showAlign();" onchange="showAlign();" >
+  </div>
+
+  <div class="standardSliderHome">
+    Cohesion = <span id="readoutCoh">0.5</span>
+    <input type="range" id="sliderCoh" min="0" max="2" step="0.01" value="0.5" oninput="showCoh();" onchange="showCOh();" >
+  </div>
+
+  <div class="standardSliderHome">
+    Separation = <span id="readoutSep">0.5</span>
+    <input type="range" id="sliderSep" min="0" max="2" step="0.01" value="0.5" oninput="showSep();" onchange="showSep();" >
+  </div>
+
+  
+
+  <div class="standardSliderHome">
+    Trail alpha = <span id="readoutM">0.2</span>
+    <input type="range" id="sliderM" min="0" max="1" step="0.01" value="0.2" oninput="showM();" onchange="showM();" >
+  </div>
+</div>
+
+
+
+
+
+<script src="../js/BOIDS.js"></script>
+<script src="../js/js-colormaps.js"></script>
+<script src="../js/navAnimation.js"></script>
+
+
+
+</div>
+
+</body>
+</html>

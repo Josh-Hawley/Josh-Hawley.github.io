@@ -8,7 +8,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@700&family=Fira+Sans:wght@300;400&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Josefin+Sans:wght@300;400;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@700&family=Fira+Sans:wght@300;400&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Josefin+Sans:wght@300;400;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="css/style.css">
 
 
   <style>
@@ -43,9 +44,9 @@
       <h4> <a href="index.html">Josh Hawley</a></h4>
     </div>
     <ul class="nav-links">
-      <li> <a href="About.html">About me</a> </li>
-      <li> <a href="NeuralTube.html" class="current">Neural tube</a> </li>
-      <li> <a href="SpringyParticles.html">Springy particles</a> </li>
+      <li> <a href="index.html">Home</a> </li>
+      <li> <a href="html/About.html">About me</a> </li>
+      <li> <a href="html/portfolio.html">Portfolio</a> </li>
     </ul>
     <div class="burger">
       <div class="line1"></div>
@@ -56,15 +57,53 @@
 
     <div class="mainText">
       <h1>What's on this website?</h1>
-      <p>Hello! This website contains all the interesting Javascript projects I am working on. It's a little space where I'm making interactive simulations, including one based around my <a style="text-decoration: underline;" href="NeuralTube.html">PhD work</a>. There are a couple of other simulations, a gravitational one below, and the others are found in the nav bar.</p>
-    
-      
+      <p>This is a little space where you will find all the interesting Javascript projects I'm working on as well as a <a style="text-decoration: underline;" href="html/portfolio.html">portfolio</a> of some of my scientific illustrations.
+        
+      <p>Below you will find links to interactive simulations that I have also spent time making visually pleasing! If you want to find out more about me, <a style="text-decoration: underline;" href="html/About.html">head over here</a>.</p>
+        
     </div>
-     
-       
-<canvas style id="theCanvas"></canvas>
+ 
 
-<div style="margin-top: 0px;" class="sliderWrapper">
+
+
+<h2>Interactive simulations</h2>
+
+<div style="margin-bottom: 50px;" class="gallery-auto-fit">
+  <div class="sim-link-wrap">
+    <h3>Neural tube</h3>
+    <a href="html/NeuralTube.html"><img src="img/NeuralTube.png" alt="Neural tube sim" class="sim-img-link"></a>
+  </div>
+
+  <div class="sim-link-wrap">
+    <h3>Planets</h3>
+    <a href="html/Planets.html"><img src="img/Planets.png" alt="Planets sim" class="sim-img-link"></a>
+  </div>
+
+  <div class="sim-link-wrap">
+    <h3>Springy particles</h3>
+    <a href="html/SpringyParticles.html"><img src="img/SpringyParticles.png" alt="Springy particles sim" class="sim-img-link"></a>
+  </div>
+
+  <div class="sim-link-wrap">
+    <h3>BOIDS</h3>
+    <a href="html/BOIDS.html"><img src="img/Boids.png" alt="BOIDS sim" class="sim-img-link"></a>
+  </div>
+
+</div>
+
+
+
+<div style="margin-bottom: 50px;" class="sim-link-wrap">
+  <div style="justify-content: center; align-items: center; text-align: center;">
+    <h2>Portfolio</h2>
+    <a href="html/portfolio.html"> <img style="width: 400px; margin-left: auto; margin-right: auto;" src="img/img5.png" alt=""> </a>
+  </div>   
+</div>
+
+
+<!-- <canvas style id="theCanvas"></canvas> -->
+
+<!-- <div style="margin-top: 0px;" class="sliderWrapper">
   <div class="standardSliderHome">
     G = <span id="readoutG">600</span>
     <input type="range" id="sliderG" min="100" max="2000" step="1" value="600" oninput="showG();" onchange="showG();" >
@@ -84,24 +123,24 @@
 <div class="mainText">
   <h2>"It's not a ghost, it's gravity!" <span style="font-size:15px;"> <i>[1]</i></span></h2>
 <p>A simple simulation of planets orbiting the sun (and each other). Play around with the sliders to change strength of gravity 'G' and the number of planets. You can also drag the Sun around (if you are on a desktop).
-  <!-- The forceThe particles or planets below are programmed to follow Newton's law of universal gravitation <i>[2]</i>, meaning each particle attracts every other particle with a force dependent on the distance between them as well as the product of both their masses. </p> -->
-<!-- <p>This simple interaction results in chaotic motion, not solvable without simulations like this! Play around with the sliders below, or drag the sun around (big yellow blob).</p> -->
-</div> 
+  The forceThe particles or planets below are programmed to follow Newton's law of universal gravitation <i>[2]</i>, meaning each particle attracts every other particle with a force dependent on the distance between them as well as the product of both their masses. </p>
+<p>This simple interaction results in chaotic motion, not solvable without simulations like this! Play around with the sliders below, or drag the sun around (big yellow blob).</p>
+</div>  -->
 
 
 
-<script src="nBodyCanvas.js"></script>
-<script src="js-colormaps.js"></script>
-<script src="navAnimation.js"></script>
+<!-- <script src="js/nBodyCanvas.js"></script> -->
+<script src="js/js-colormaps.js"></script>
+<script src="js/navAnimation.js"></script>
 
-<footer>
+<!-- <footer>
   <div style="margin-top: 60px; width: 50%; margin-left: auto; margin-right: auto;">
     <h2 style="text-align: left;">References</h2>
     <p style="text-align: left;">
       <a  href="https://youtu.be/9yd6Voy8j24?t=211"><i>[1]</i> Interstellar (2014)</a> <br> 
             </p>
     </div>
-</footer>
+</footer> -->
 
 
 </div>
