@@ -501,26 +501,22 @@ a:hover {
 
 
 
-.master-container{
-  max-width: 850px;
-  margin: 0 auto;
-}
+/* .master-container{
 
-.grid {
-  /* max-width: 800px; */
-  margin: 0 auto;
-  
-}
+} */
 
-.masonImg{
-  width: 300px;
+
+.W1{
+  width: 60%;
   height: auto;
   border-radius: 10px;
+  margin-top: 60px;
 }
-.masonImgW2{
-  width: 300px;
+.W2{
+  width: 90%;
   height: auto;
   border-radius: 10px;
+  margin-top: 60px;
 }
 
 .grid-item{
@@ -528,61 +524,26 @@ a:hover {
 }
 
 .grid{
+  justify-content: center;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+  max-width: 900px;
 }
 
 
-@media (min-width: 450px) {
-  /* .grid-item{
-    width: 45%;
-  } */
 
-  .masonImg{
-    width: 400px;
-    height: auto;
 
-  }
-  .masonImgW2{
-    width: 400px;
-    height: auto;
 
-  }
 
-}
 
-@media (min-width: 810px) {
-  /* .grid-item{
-    width: 45%;
-  } */
 
-  .masonImg{
-    width: 400px;
-    height: auto;
 
-  }
-  .masonImgW2{
-    width: 810px;
-    height: auto;
 
-  }
 
-}
 
-/* @media (min-width: 1200px) {
-  .masonImg{
-    width: 500px;
-    height: auto;
 
-  }
-  .masonImgW2{
-    width: 1000px;
-    height: auto;
- 
-  }
-
-} */
 
 
 .sim-link-wrap{
@@ -616,5 +577,8 @@ text-align: center;
   transform: scale(1.05);
 
 }
+
+
+
 
 
