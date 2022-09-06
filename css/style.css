@@ -10,6 +10,7 @@
 body{
   margin: 0;
   padding: 0px;
+  padding-bottom: 100px;
   /* display: grid; */
   /* place-items: center; */
   min-height: 100vh;
