@@ -53,15 +53,16 @@
     </div>
   </nav>
 
-     
+<h1>Boids simulation</h1>
+<p>The boids algorithm is a simualtion of how flocks of birds interact and form various types of flocking patterns. Each boid has a certain radius in which it will interact with other boids, and you can play around with the three interaction parameters below. Find out more information about the algorithm <a style="text-decoration: underline;" href="https://cs.stanford.edu/people/eroberts/courses/soco/projects/2008-09/modeling-natural-systems/boids.html">here</a>.</p>
        
 <canvas style id="theCanvas"></canvas>
 
 <div style="margin-top: 0px;" class="sliderWrapper">
  
   <div class="standardSliderHome">
-     N = <span id="readoutN">150</span>
-    <input type="range" id="sliderN" min="2" max="2000" step="1" value="150" oninput="showN();" onchange="showN();" >
+     BOIDS = <span id="readoutN">150</span>
+    <input type="range" id="sliderN" min="2" max="800" step="1" value="150" oninput="showN();" onchange="showN();" >
   </div>
 
   <div class="standardSliderHome">
