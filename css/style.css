@@ -190,19 +190,18 @@ a:hover {
 
 .line1{
   position: absolute;
-  right: 50px;
+  right: 30px;
   top: 22px;
   margin: 8px;
-  /* margin-bottom: 10px; */
 }
 .line2{
   position: absolute;
-  right: 50px;
+  right: 30px;
   top: 30px;
 }
 .line3{
   position: absolute;
-  right: 50px;
+  right: 30px;
   top: 38px;
 }
 
