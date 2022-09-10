@@ -16,7 +16,8 @@ body::after {
   width: 100vw;
   background-attachment: absolute;
   background-size:250% 250%;
-  background-position: 50% 40%;
+  /* background-position: 50% 40%; */
+  background-position: 50% -600px;
   position: fixed;
 }
 
