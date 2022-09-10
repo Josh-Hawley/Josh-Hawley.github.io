@@ -100,7 +100,8 @@ body::after {
   height: 100%;
   width: 100%;
   background-attachment: absolute;
-  background-size:250% 250%;
+  /* background-size:250% 250%; */
+  background-size: cover;
   /* background-position: 50% 40%; */
   background-position: 50% 40%;
   position: fixed;
@@ -327,7 +328,7 @@ a:hover {
     align-items: left;
   }
   html {
-    /* position: fixed; */
+    position: fixed;
     height: 100%;
     overflow: hidden;
   }
@@ -717,7 +718,7 @@ text-align: center;
   grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
   /* grid-auto-rows: auto; */
   grid-gap: 1rem;
-  max-width: 700px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 30px;
