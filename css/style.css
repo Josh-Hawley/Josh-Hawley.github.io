@@ -209,11 +209,7 @@ h3{
   font-weight: 400;
   font-size: 12pt;
 }
-h4{
-  font-size: 18pt;
-  text-align: left;
-  color: rgb(243, 241, 236);
-}
+
 
 p {
   /* text-align: center; */
@@ -268,10 +264,10 @@ nav {
 }
 
 .logo{
-
   text-transform: uppercase;
-  letter-spacing: 5px;
-  font-size: 20px;
+  letter-spacing: 6px;
+  font-size: 18pt;
+  color: rgb(243, 241, 236);
 }
 
 a {
@@ -324,6 +320,7 @@ a:hover {
     backdrop-filter: blur(10px);
     border-radius: 5px;
     padding: 5px;
+    margin-bottom: 8px;
 }
 
 .burger div{
@@ -402,6 +399,7 @@ a:hover {
     top: 0vh;
     background-color: rgba(22, 30, 35, 0.8); 
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -632,6 +630,8 @@ a:hover {
   /* justify-content: center; */
   margin-left: auto;
   margin-right: auto;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 @media screen and (max-width: 768px) {
