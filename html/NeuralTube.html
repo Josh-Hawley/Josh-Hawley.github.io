@@ -13,18 +13,11 @@
   <style>
 
     canvas {
-      /* padding-left: 0;
-      padding-right: 0;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-      position: relative;
-      justify-content: center;
-      float: none; */
        border-radius: 30px;
-      /* background-color: rgb(15, 22, 26); */
-      background-color: rgba(15, 20, 23, 0.5); 
-      backdrop-filter: blur(5px);
+      /* background-color: rgba(15, 20, 23, 0.5); 
+      backdrop-filter: blur(5px); */
+      background-color: rgba(15, 20, 23, 0.3); 
+       backdrop-filter: blur(5px);
       margin-bottom: 200px;
   
    }
@@ -54,17 +47,27 @@
 </header>
 
 <body>
+  <div class="bg-image"></div> 
 
-  <!-- <div class="rows">
-    
-    <div class="columns" style="padding-top: 25px;"> -->
+      <div class="mainText">
+        <h1>Neural tube simulation</h1>
+        <p>Below, each circle represents a cell, and the colour of the cell represents the amount of a gene called Notch that is being expressed. During embryoinic development, a structure called the neural tube, which goes on to form the spinal cord, is made up of many of these Notch expressing cells, which are able to communicate their levels of expression to any neighbour that it is in direct contact with.</p>
+
+        <p>Cells that are in contact will inhibit each other's expression, leading to an alternating pattern of high and low expression, where low expression in the neural tube would give rise to differentiating cells (not simulated here), and so this is a form of controlling the rate of differentiation.</p>
+
+        <p>The question of my PhD work is how exactly do we get different lengths of repreating pattern, and how can the location of these high and low expression regions be made to change location over time? This particular implentation is focussing on the effect of cell movement (interkinetic nuclear migration), and how thin bits of membrane that emanate from cells (protrusions) can extend Notch signalling distance.</p>
+
+        <p>Interkinetic movement is cell movement left and right, and is programmed here as a random walk. You will see one cell has lines connecting it to other cells, this is to visualise how an individual cell's protrusions contact other cells, and these are programmed to have a random probability of forming a new protrusion as well as an associated lifetime before they dissapear.</p>
+      </div>
+      
+      
 <div class="wrapperNeural" >
 
   <div class="box1">
-    <h1>Simulation settings</h1>
-    <p style="text-align: center;">Try clicking and dragging on the cells or messing around with the sliders below!</p>
+    <h2>Simulation settings</h2>
+    <p style="text-align: center;">Try clicking and dragging on the cells or messing around with the sliders below!  </p>
     
-    <div class="settingsBox">
+    <div style="font-size: 11pt;" class="settingsBox">
 
       <div class="standardSliderNeural">
           <!-- <input type="button" value="Fire!" onclick="fireProjectile();">  -->

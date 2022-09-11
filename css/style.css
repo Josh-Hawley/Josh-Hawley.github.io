@@ -111,7 +111,7 @@
   height: 100vh;
   /* overflow: hidden; */
   /* background-position: center; */
-  opacity: 0.1;
+  opacity: 0.08;
   /* background-size: cover; */
   background: url(../img/background.svg) no-repeat;
   background-attachment: absolute;
@@ -178,8 +178,10 @@ header {
 
 h1 {
   margin: 0;
-  margin-top: 50px;
+  margin-top: 120px;
   margin-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
   text-align: center;
   /* font-family: josefin sans; */
   font-weight: 300;
@@ -204,6 +206,8 @@ h3{
   font-size: 15pt;
   color: rgb(243, 241, 236);
   margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 12pt;
 }
 h4{
   font-size: 18pt;
@@ -212,7 +216,8 @@ h4{
 }
 
 p {
-  text-align: center;
+  /* text-align: center; */
+  text-align: justify;
   padding: 0px 30px 20px;
   /* font-size: 16px; */
   line-height: 24px;
@@ -221,6 +226,10 @@ p {
   /* font-family: inter; */
   /* font-family: Nunito; */
   color: rgb(243, 241, 236);
+}
+
+.fig{
+  text-align: center;
 }
 
 .mainText{
@@ -244,13 +253,18 @@ p {
 
 
 nav {
+  /* background-color: rgba(22, 30, 35, 0.5); 
+  backdrop-filter: blur(10px); */
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 8vh;
+  height: 80px;
   font-family: josefinsans-medium;
   font-weight: 500;
-  background-color: rgba(0,0,0 , 0);
+  /* background-color: rgba(0,0,0 , 0); */
+  position: sticky;
+  width: 100vw;
+  z-index: 3;
 }
 
 .logo{
@@ -305,12 +319,19 @@ a:hover {
   color: rgb(255, 221, 120);
 }
 
+.burger{
+  background-color: rgba(22, 30, 35, 0.8); 
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    padding: 5px;
+}
+
 .burger div{
   width: 28px;
   height: 3px;
   background-color: rgb(226,226,226);
   margin: 5px;
-  position: absolute;
+  /* position: absolute; */
   /* right: 40px;
   top: 0px; */
   z-index: 3;
@@ -318,7 +339,7 @@ a:hover {
 
 }
 
-.line1{
+/* .line1{
   position: absolute;
   right: 30px;
   top: 22px;
@@ -333,7 +354,7 @@ a:hover {
   position: absolute;
   right: 30px;
   top: 38px;
-}
+} */
 
 .burger{
   display: none;
@@ -384,7 +405,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 1;
+    z-index: 0;
     width: 200px;
     transform: translateX(100%);
     transition: transform 0.2s ease-in;
@@ -598,6 +619,7 @@ a:hover {
   width: 600px;
   margin-left: auto;
   margin-right: auto;
+  font-size: 11pt;
   /* flex-direction: column; */
 }
 

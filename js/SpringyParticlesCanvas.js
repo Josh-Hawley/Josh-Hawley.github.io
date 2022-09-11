@@ -404,7 +404,7 @@ function Particle (x, y, x0, y0, vx, vy, B, radius){
     if (this.x > w-cutOffDistBound){
       this.ax += rigidity*((w - cutOffDistBound) - this.x);
     }
-    if (this.y < cutOffDistBound){
+    if (this.y < cutOffDistBound ){
       this.ay += rigidity*(cutOffDistBound - this.y);
     }
     if (this.y > h-cutOffDistBound){

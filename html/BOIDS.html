@@ -34,7 +34,7 @@
 
 
 <body>
-  <div class="bg-image">
+  <div class="bg-image"></div> 
   <div class="bodyDiv">
   
   <nav>
@@ -55,9 +55,9 @@
 
 <h1>Boids simulation</h1>
 <div class="mainText">
-<p>The boids algorithm is a simualtion of how flocks of birds interact and form various types of flocking patterns. Each boid has a certain radius in which it will interact with other boids, and you can play around with the three interaction parameters below. Find out more information about the algorithm <a style="text-decoration: underline;" href="https://cs.stanford.edu/people/eroberts/courses/soco/projects/2008-09/modeling-natural-systems/boids.html">here</a>.</p>
+<p>The boids algorithm is a simualtion of how flocks of birds interact and form various types of flocking patterns. Each boid has a certain radius in which it will interact with other boids, and you can play around with the three interaction parameters below (align, cohesion, separation). Find out more information about the algorithm <a style="text-decoration: underline;" href="https://cs.stanford.edu/people/eroberts/courses/soco/projects/2008-09/modeling-natural-systems/boids.html">here</a>.</p>
 </div>  
-<canvas style id="theCanvas"></canvas>
+
 
 <div style="margin-top: 0px;" class="sliderWrapper">
  
@@ -88,6 +88,8 @@
     <input type="range" id="sliderM" min="0" max="1" step="0.01" value="0.2" oninput="showM();" onchange="showM();" >
   </div>
 </div>
+
+<canvas style id="theCanvas"></canvas>
 
 
 
