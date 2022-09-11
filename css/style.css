@@ -625,6 +625,7 @@ a:hover {
   /* border: 2px solid #ddd;  */
   background-color: rgba(15, 20, 23, 0.3); 
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-radius: 20px; 
   width: 600px; 
   /* justify-content: center; */
