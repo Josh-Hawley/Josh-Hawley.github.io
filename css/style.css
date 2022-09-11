@@ -87,7 +87,7 @@
 }
 
 
-body::after {
+/* body::after {
   content: "";
   background: url(../img/background.svg) no-repeat fixed center;
   opacity: 0.1;
@@ -101,9 +101,21 @@ body::after {
   width: 100%;
   background-attachment: absolute;
   background-size:250% 250%;
-  /* background-position: 50% 40%; */
-  background-position: -450px -300px;
+  background-position: 50% 40%;
   position: fixed;
+} */
+
+
+.bg-image{
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background: url(../img/background.svg) no-repeat;
+  background-attachment: fixed;
+  /* background-color: aqua; */
+  position: absolute;
+  z-index: -1;
 }
 
 
