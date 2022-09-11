@@ -112,9 +112,9 @@
   background-position: center;
   background-size: cover;
   background: url(../img/background.svg) no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   /* background-color: aqua; */
-  position: absolute;
+  position: fixed;
   z-index: -1;
 }
 
