@@ -63,6 +63,8 @@ const radius= 3;
 var minSpeed = 1;
 var desiredSpeed = 6;
 var perceptionRadius = 50;
+const borderInteractionDist = 50;
+const borderInteractionCoeff = 0.02;
 
 
 var cohesionCoeff = Number(sliderCoh.value);
@@ -329,19 +331,12 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
     let align = this.align(particles,i);
     let cohesion = this.cohesion(particles, i);
     let separation = this.separation(particles,i);
-    // this.ax = alignCoeff*align[0] + cohesionCoeff*cohesion[0];
-    // this.ay = alignCoeff*align[1] + cohesionCoeff*cohesion[1];
-    this.ax = alignCoeff*align[0] + cohesionCoeff*cohesion[0] + separationCoeff*separation[0];
-    this.ay = alignCoeff*align[1] + cohesionCoeff*cohesion[1] + separationCoeff*separation[1];
+    let boundaryForce = this.boundaries();
+
+    this.ax = alignCoeff*align[0] + cohesionCoeff*cohesion[0] + separationCoeff*separation[0] + borderInteractionCoeff*boundaryForce[0];
+    this.ay = alignCoeff*align[1] + cohesionCoeff*cohesion[1] + separationCoeff*separation[1] + borderInteractionCoeff*boundaryForce[1];
 
 
-    // let alignment = this.align(particles, i);
-    
-    // let separation = 
-
-    
-    // this.ax = cohesion[0];
-    // this.ay = cohesion[1];
 
     this.vx += this.ax*dt;
     this.vy += this.ay*dt;
@@ -359,17 +354,6 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
         this.vx = this.vx*speedMult;
         this.vy = this.vy*speedMult;
       }
-
-    // let speed = Math.sqrt(vx*vx + vy*vy);
-    // console.log(i)
-    // // console.log(v)
-    // let minSpeed = 10;
-    // var vMult = minSpeed/speed;
-    // console.log(vMult)
-    // this.vx = this.vx*vMult;
-    // this.vy = this.vy*vMult;
-
-    
 
 
     this.x  += this.vx*dt;
@@ -460,18 +444,8 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       xAvg = xAvg/total;
       yAvg = yAvg/total;
 
-      
-
-      // speedAvg = Math.sqrt(xAvg*xAvg + yAvg*yAvg);
-      
-      // speedMult = desiredSpeed/speedAvg;
-
-      // xAvg = xAvg*speedMult;
-      // yAvg = yAvg*speedMult;
-
       steeringX = xAvg - this.x;
       steeringY = yAvg - this.y;
-
 
       force = Math.sqrt(steeringX*steeringX + steeringY*steeringY);
       if (force>maxForce){
@@ -515,16 +489,6 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
       steeringX = diffX/total;
       steeringY = diffY/total;
 
-      // speedAvg = Math.sqrt(xAvg*xAvg + yAvg*yAvg);
-      
-      // speedMult = desiredSpeed/speedAvg;
-
-      // xAvg = xAvg*speedMult;
-      // yAvg = yAvg*speedMult;
-
-      // steeringX = xAvg - this.x;
-      // steeringY = yAvg - this.y;
-
 
       force = Math.sqrt(steeringX*steeringX + steeringY*steeringY);
       if (force>maxForce){
@@ -554,18 +518,43 @@ function Particle (x, y, x0, y0, vx, vy, radius, m){
 
 
     this.boundaries = function() {
-      if(this.x > w){
-        this.x = 0;
+      // if(this.x > w){
+      //   this.x = 0;
+      // }
+      // if(this.x < 0){
+      //   this.x = w;
+      // }
+      // if(this.y > h){
+      //   this.y = 0;
+      // }
+      // if(this.y < 0){
+      //   this.y = h;
+      // }
+
+
+      steeringX = 0;
+      steeringY = 0;
+
+      if (this.x < borderInteractionDist){
+        steeringX = borderInteractionDist - this.x;
       }
-      if(this.x < 0){
-        this.x = w;
+
+      if (this.x > w - borderInteractionDist){
+        steeringX = (w - borderInteractionDist) - this.x ;
       }
-      if(this.y > h){
-        this.y = 0;
+
+      if (this.y < borderInteractionDist){
+        steeringY = borderInteractionDist - this.y;
       }
-      if(this.y < 0){
-        this.y = h;
+
+      if (this.y > h - borderInteractionDist){
+        steeringY = (h - borderInteractionDist) - this.y ;
       }
+
+        
+     
+
+      return [steeringX, steeringY];
 
     }
 
