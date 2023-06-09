@@ -105,6 +105,14 @@
   position: fixed;
 } */
 
+.video-item {
+  max-width: 80%;
+  height: auto;
+}
+
+.rounded {
+  border-radius: 10px;
+}
 
 .bg-image{
   width: 100vw;
